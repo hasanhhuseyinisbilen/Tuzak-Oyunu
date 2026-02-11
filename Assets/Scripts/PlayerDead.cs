@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerDeath : MonoBehaviour
+public class PlayerDead : MonoBehaviour
 {
     [Header("DeadZone Ayarları")]
     [SerializeField] private float deathY = -10f; 
