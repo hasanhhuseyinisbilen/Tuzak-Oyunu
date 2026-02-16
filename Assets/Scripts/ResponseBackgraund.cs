@@ -1,45 +1,19 @@
 using UnityEngine;
 
 [ExecuteAlways]
-[RequireComponent(typeof(SpriteRenderer))]
-public class ResponseBackgraund : MonoBehaviour
+public class FitBackground : MonoBehaviour
 {
-    [SerializeField] private float padding = 0.01f;
-    [Range(0, 1)] [SerializeField] private float widthPercent = 1f;
-    [Range(0, 1)] [SerializeField] private float heightPercent = 1f;
-
-    private Camera cam;
-    private SpriteRenderer sr;
-
-    private void Start()
+    void Update()
     {
-        cam = Camera.main;
-        sr = GetComponent<SpriteRenderer>();
-        
-        ScaleBackground();
-    }
+        var sr = GetComponent<SpriteRenderer>();
+        var cam = Camera.main;
 
-    private void LateUpdate()
-    {
-        if (!cam) cam = Camera.main;
-        if (!sr) sr = GetComponent<SpriteRenderer>();
-
-        if (!cam || !cam.orthographic || !sr || !sr.sprite) return;
-
-        ScaleBackground();
-    }
-
-    public void ScaleBackground()
-    {
-        float worldHeight = cam.orthographicSize * 2f;
-        float worldWidth = worldHeight * cam.aspect;
-
-        Vector2 spriteSize = sr.sprite.bounds.size;
-
-        transform.localScale = new Vector3(
-            (worldWidth * widthPercent) / spriteSize.x + padding,
-            (worldHeight * heightPercent) / spriteSize.y + padding,
-            1f
-        );
+        if (sr && cam)
+        {
+            var bounds = sr.sprite.bounds;
+            var height = cam.orthographicSize * 2f;
+            var width = height * cam.aspect;
+            transform.localScale = new Vector3(width / bounds.size.x, height / bounds.size.y, 1f);
+        }
     }
 }
