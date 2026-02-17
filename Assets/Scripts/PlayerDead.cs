@@ -1,15 +1,24 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class PlayerDead : MonoBehaviour
 {
     [Header("DeadZone Ayarları")]
-    [SerializeField] private float deathY = -10f; 
-    private bool isDead = false; 
+    [SerializeField] private float deathY = -10f;
+
+    private bool isDead = false;
+
+    private Rigidbody2D rb;
+    private SnowyLevelManager levelManager;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        levelManager = FindObjectOfType<SnowyLevelManager>();
+    }
 
     void Update()
     {
-      
         if (!isDead && transform.position.y < deathY)
         {
             RestartLevel();
@@ -18,14 +27,12 @@ public class PlayerDead : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isDead) return; 
+        if (isDead) return;
 
-        if (
-            collision.gameObject.CompareTag("Trap") ||
+        if (collision.gameObject.CompareTag("Trap") ||
             collision.gameObject.CompareTag("Icicle") ||
             collision.gameObject.CompareTag("FlyBox") ||
-            collision.gameObject.CompareTag("Diken")
-           )
+            collision.gameObject.CompareTag("Diken"))
         {
             RestartLevel();
         }
@@ -33,14 +40,12 @@ public class PlayerDead : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isDead) return; 
+        if (isDead) return;
 
-        if (
-            other.CompareTag("Trap") ||
+        if (other.CompareTag("Trap") ||
             other.CompareTag("Icicle") ||
-            other.CompareTag("FlyBox")||
-            other.CompareTag("Diken")
-           )
+            other.CompareTag("FlyBox") ||
+            other.CompareTag("Diken"))
         {
             RestartLevel();
         }
@@ -48,35 +53,25 @@ public class PlayerDead : MonoBehaviour
 
     void RestartLevel()
     {
-        if (isDead) return; 
+        if (isDead) return;
 
-        isDead = true; 
+        isDead = true;
 
-  
         if (LivesManager.Instance != null)
-        {
             LivesManager.Instance.LoseLife();
-        }
 
-        SnowyLevelManager manager = FindObjectOfType<SnowyLevelManager>();
-        if (manager != null)
-        {
-            manager.RestartLevel();
-        }
+        if (levelManager != null)
+            levelManager.RestartLevel();
 
-        transform.position = Vector3.zero;
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
-        {
             rb.linearVelocity = Vector2.zero;
-        }
 
-        Invoke("ResetDeathFlag", 0.5f);
+        StartCoroutine(ResetDeathFlagRoutine());
     }
 
-    void ResetDeathFlag()
+    IEnumerator ResetDeathFlagRoutine()
     {
+        yield return new WaitForSeconds(0.5f);
         isDead = false;
     }
 }
