@@ -3,7 +3,7 @@ using UnityEngine;
 public class DikenTetikleyici : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField]private DusenDiken targetSpike;
+    [SerializeField] private DusenDiken targetSpike;
 
     private bool triggered = false;
 
