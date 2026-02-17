@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class BoxActivatePolygonSpike : MonoBehaviour
+public class BoxActiveSpike : MonoBehaviour
 {
     [Header("Aktif Edilecek Polygon Dikenler")]
     [SerializeField] private SpriteRenderer[] spikeSprites;
