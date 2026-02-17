@@ -33,6 +33,10 @@ public class PlayerMovement2D : MonoBehaviour
         move.Enable();
         jump.Enable();
     }
+    private void OnDisable() {
+        move.Disable();
+        jump.Disable();
+    }
 
     private Collider2D col;
 
