@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SawMoveAndRotate : MonoBehaviour
+public class SawRotation : MonoBehaviour
 {
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 360f;
