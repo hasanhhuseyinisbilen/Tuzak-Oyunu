@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BoxCloseTrigger : MonoBehaviour
+public class ThrustTrigger : MonoBehaviour
 {
     [Header("Normal Boxlar")]
     [SerializeField] private SpriteRenderer[] boxSprites;
