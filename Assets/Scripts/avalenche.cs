@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SnowBallTrigger : MonoBehaviour
+public class Avalenche : MonoBehaviour
 {
     [Header("Target Object")]
     [SerializeField] private Transform snowBall;  
