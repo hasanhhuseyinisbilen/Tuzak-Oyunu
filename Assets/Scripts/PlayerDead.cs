@@ -11,6 +11,12 @@ public class PlayerDead : MonoBehaviour
     private Rigidbody2D rb;
     private SnowyLevelManager levelManager;
 
+    // Tag Constants
+    private const string TAG_TRAP = "Trap";
+    private const string TAG_ICICLE = "Icicle";
+    private const string TAG_FLYBOX = "FlyBox";
+    private const string TAG_DIKEN = "Diken";
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,10 +35,10 @@ public class PlayerDead : MonoBehaviour
     {
         if (isDead) return;
 
-        if (collision.gameObject.CompareTag("Trap") ||
-            collision.gameObject.CompareTag("Icicle") ||
-            collision.gameObject.CompareTag("FlyBox") ||
-            collision.gameObject.CompareTag("Diken"))
+        if (collision.gameObject.CompareTag(TAG_TRAP) ||
+            collision.gameObject.CompareTag(TAG_ICICLE) ||
+            collision.gameObject.CompareTag(TAG_FLYBOX) ||
+            collision.gameObject.CompareTag(TAG_DIKEN))
         {
             RestartLevel();
         }
@@ -42,10 +48,10 @@ public class PlayerDead : MonoBehaviour
     {
         if (isDead) return;
 
-        if (other.CompareTag("Trap") ||
-            other.CompareTag("Icicle") ||
-            other.CompareTag("FlyBox") ||
-            other.CompareTag("Diken"))
+        if (other.CompareTag(TAG_TRAP) ||
+            other.CompareTag(TAG_ICICLE) ||
+            other.CompareTag(TAG_FLYBOX) ||
+            other.CompareTag(TAG_DIKEN))
         {
             RestartLevel();
         }
@@ -64,14 +70,6 @@ public class PlayerDead : MonoBehaviour
             levelManager.RestartLevel();
 
         if (rb != null)
-            rb.linearVelocity = Vector2.zero;
-
-        StartCoroutine(ResetDeathFlagRoutine());
-    }
-
-    IEnumerator ResetDeathFlagRoutine()
-    {
-        yield return new WaitForSeconds(0.5f);
-        isDead = false;
+            rb.velocity = Vector2.zero;
     }
 }
