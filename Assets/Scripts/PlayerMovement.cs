@@ -39,6 +39,7 @@ public class PlayerMovement2D : MonoBehaviour
     }
 
     private Collider2D col;
+    private Collider2D[] groundHits = new Collider2D[10];
 
     void Start()
     {
@@ -57,7 +58,7 @@ public class PlayerMovement2D : MonoBehaviour
         else if (moveInput < -0.1f)
             transform.localScale = new Vector3(-1, 1, 1);
 
-        if (groundLayer.value == 0) groundLayer = ~0;
+
 
 
         Bounds bounds = col.bounds;
@@ -67,11 +68,12 @@ public class PlayerMovement2D : MonoBehaviour
         Vector2 boxSize = new Vector2(bounds.size.x * 0.9f, extraHeight);
 
 
-        Collider2D[] hits = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0, groundLayer);
+        int hitCount = Physics2D.OverlapBoxNonAlloc(boxCenter, boxSize, 0, groundHits, groundLayer);
         
         isGrounded = false;
-        foreach (var h in hits)
+        for (int i = 0; i < hitCount; i++)
         {
+            var h = groundHits[i];
             if (h.gameObject != gameObject && !h.isTrigger)
             {
                 isGrounded = true;
@@ -101,12 +103,12 @@ public class PlayerMovement2D : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
 
     
         if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+            rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
             jumpBufferCounter = 0f;
