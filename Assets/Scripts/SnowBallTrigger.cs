@@ -13,7 +13,7 @@ public class SnowBallTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (!move || snowBall == null) return;
+        if (!isMoving || snowBall == null) return;
 
    
         snowBall.Translate(Vector2.left * moveSpeed * Time.deltaTime, Space.World);
@@ -26,6 +26,6 @@ public class SnowBallTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        move = true;
+        isMoving = true;
     }
 }
