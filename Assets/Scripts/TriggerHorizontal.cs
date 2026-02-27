@@ -8,6 +8,9 @@ public class TriggerHorizontal : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        saw.Activate();
+        if (saw != null)
+        {
+            saw.Activate();
+        }
     }
 }
