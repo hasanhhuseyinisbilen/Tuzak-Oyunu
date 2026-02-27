@@ -4,6 +4,12 @@ using UnityEngine.SceneManagement;
 public class LevelEnd : MonoBehaviour
 {
     private bool triggered = false;
+    private SnowyLevelManager manager;
+
+    private void Start()
+    {
+        manager = FindObjectOfType<SnowyLevelManager>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -12,7 +18,6 @@ public class LevelEnd : MonoBehaviour
 
         triggered = true;
 
-        SnowyLevelManager manager = FindObjectOfType<SnowyLevelManager>();
         if (manager != null)
         {
             int currentIdx = LevelSelector.SelectedLevelIndex; 
@@ -22,7 +27,7 @@ public class LevelEnd : MonoBehaviour
                 PlayerPrefs.SetInt("ReachedLevel", reached + 1);
                 PlayerPrefs.Save();
             }
-              SceneManager.LoadScene(1); 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); 
         }
     }
 }
