@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class IceBreak : MonoBehaviour
+public class BrokenIce : MonoBehaviour
 {
     public float breakTime = 2f;
 
