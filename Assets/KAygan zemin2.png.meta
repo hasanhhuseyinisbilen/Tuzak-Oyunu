@@ -1,0 +1,1144 @@
+fileFormatVersion: 2
+guid: ed7663bcdcd60124fac926469ec33566
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6145399305079088909
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_0
+  - first:
+      213: 6693383568252616183
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_1
+  - first:
+      213: -4274566592520166919
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_2
+  - first:
+      213: -6670050043230394251
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_3
+  - first:
+      213: -4875810209909383575
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_4
+  - first:
+      213: 566281771323301474
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_5
+  - first:
+      213: 6000532631238230422
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_6
+  - first:
+      213: -8846179659981032355
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_7
+  - first:
+      213: -2554995527199044867
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_8
+  - first:
+      213: 4788727032023545734
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_9
+  - first:
+      213: 353523833341264155
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_10
+  - first:
+      213: -329243720895015417
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_11
+  - first:
+      213: 1663652548764921738
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_12
+  - first:
+      213: -2428524642877910380
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_13
+  - first:
+      213: 3174815874005930387
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_14
+  - first:
+      213: -3388279473168021389
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_15
+  - first:
+      213: -8152467964360684423
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_16
+  - first:
+      213: -3041283105013194522
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_17
+  - first:
+      213: 3282133190230023189
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_18
+  - first:
+      213: -6010040347378473714
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_19
+  - first:
+      213: 3320720813093487656
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_20
+  - first:
+      213: 327991291391895576
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_21
+  - first:
+      213: 4649928834901534463
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_22
+  - first:
+      213: -4642876432510151331
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_23
+  - first:
+      213: -3170041354148106008
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_24
+  - first:
+      213: -7567020726860182978
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_25
+  - first:
+      213: -516354908782884194
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_26
+  - first:
+      213: -6643300259835679093
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_27
+  - first:
+      213: -2513668177206584331
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_28
+  - first:
+      213: 5186775705876769384
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_29
+  - first:
+      213: 8754394846532865593
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_30
+  - first:
+      213: -3177534801647592551
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_31
+  - first:
+      213: -8064732211892888335
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_32
+  - first:
+      213: 5290036436260307229
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_33
+  - first:
+      213: -2584144746016831344
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_34
+  - first:
+      213: -5855274796392318982
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_35
+  - first:
+      213: 474197064431875017
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_36
+  - first:
+      213: -1504481527028510310
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_37
+  - first:
+      213: -2235507586557843301
+    second: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_38
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_0
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 1609
+        width: 2535
+        height: 1337
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d07eb26bb18d84550800000000000000
+      internalID: 6145399305079088909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_1
+      rect:
+        serializedVersion: 2
+        x: 3524
+        y: 2432
+        width: 647
+        height: 407
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fd322b64eca3ec50800000000000000
+      internalID: 6693383568252616183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_2
+      rect:
+        serializedVersion: 2
+        x: 4254
+        y: 2458
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f1651ce450bda4c0800000000000000
+      internalID: -4274566592520166919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_3
+      rect:
+        serializedVersion: 2
+        x: 4254
+        y: 2450
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5786c2b33d83f63a0800000000000000
+      internalID: -6670050043230394251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_4
+      rect:
+        serializedVersion: 2
+        x: 4258
+        y: 2436
+        width: 625
+        height: 515
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96ed02e7274a55cb0800000000000000
+      internalID: -4875810209909383575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_5
+      rect:
+        serializedVersion: 2
+        x: 3582
+        y: 2430
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26e118e4546dbd700800000000000000
+      internalID: 566281771323301474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_6
+      rect:
+        serializedVersion: 2
+        x: 3698
+        y: 2430
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 691481cc2ac264350800000000000000
+      internalID: 6000532631238230422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_7
+      rect:
+        serializedVersion: 2
+        x: 3738
+        y: 2430
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d547b83e77e0c3580800000000000000
+      internalID: -8846179659981032355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_8
+      rect:
+        serializedVersion: 2
+        x: 3894
+        y: 2430
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfac69eda15da8cd0800000000000000
+      internalID: -2554995527199044867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_9
+      rect:
+        serializedVersion: 2
+        x: 4066
+        y: 2430
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 687f2162dd9f47240800000000000000
+      internalID: 4788727032023545734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_10
+      rect:
+        serializedVersion: 2
+        x: 4074
+        y: 2430
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b11c0f9ad08f7e400800000000000000
+      internalID: 353523833341264155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_11
+      rect:
+        serializedVersion: 2
+        x: 4294
+        y: 2430
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 706568b849a4e6bf0800000000000000
+      internalID: -329243720895015417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_12
+      rect:
+        serializedVersion: 2
+        x: 4338
+        y: 2430
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8f6ecebd2b761710800000000000000
+      internalID: 1663652548764921738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_13
+      rect:
+        serializedVersion: 2
+        x: 3514
+        y: 1752
+        width: 614
+        height: 338
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 492daf444b52c4ed0800000000000000
+      internalID: -2428524642877910380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_14
+      rect:
+        serializedVersion: 2
+        x: 3574
+        y: 1746
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 391156d67363f0c20800000000000000
+      internalID: 3174815874005930387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_15
+      rect:
+        serializedVersion: 2
+        x: 3682
+        y: 1746
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 378821265c96af0d0800000000000000
+      internalID: -3388279473168021389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_16
+      rect:
+        serializedVersion: 2
+        x: 4250
+        y: 1516
+        width: 633
+        height: 683
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97c878d749d9cde80800000000000000
+      internalID: -8152467964360684423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_17
+      rect:
+        serializedVersion: 2
+        x: 4409
+        y: 1514
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e0aa4021213bc5d0800000000000000
+      internalID: -3041283105013194522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_18
+      rect:
+        serializedVersion: 2
+        x: 4418
+        y: 1514
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51c1e2d3fba7c8d20800000000000000
+      internalID: 3282133190230023189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_19
+      rect:
+        serializedVersion: 2
+        x: 4426
+        y: 1514
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e05adb8852c089ca0800000000000000
+      internalID: -6010040347378473714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_20
+      rect:
+        serializedVersion: 2
+        x: 4445
+        y: 1514
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8240fae4cf1951e20800000000000000
+      internalID: 3320720813093487656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_21
+      rect:
+        serializedVersion: 2
+        x: 4786
+        y: 1514
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 818e5dc77524d8400800000000000000
+      internalID: 327991291391895576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_22
+      rect:
+        serializedVersion: 2
+        x: 4834
+        y: 1514
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff6e62393add78040800000000000000
+      internalID: 4649928834901534463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_23
+      rect:
+        serializedVersion: 2
+        x: 4842
+        y: 1514
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d551330db70319fb0800000000000000
+      internalID: -4642876432510151331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_24
+      rect:
+        serializedVersion: 2
+        x: 3506
+        y: 1261
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e034ba1f20c104d0800000000000000
+      internalID: -3170041354148106008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_25
+      rect:
+        serializedVersion: 2
+        x: 3509
+        y: 265
+        width: 618
+        height: 1110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3a0b7f9dba8cf690800000000000000
+      internalID: -7567020726860182978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_26
+      rect:
+        serializedVersion: 2
+        x: 1468
+        y: 269
+        width: 1111
+        height: 858
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9a87fb32f985d8f0800000000000000
+      internalID: -516354908782884194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_27
+      rect:
+        serializedVersion: 2
+        x: 4470
+        y: 1054
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8eeb348c914ec3a0800000000000000
+      internalID: -6643300259835679093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_28
+      rect:
+        serializedVersion: 2
+        x: 4473
+        y: 266
+        width: 426
+        height: 957
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fbd56e5c18ad1dd0800000000000000
+      internalID: -2513668177206584331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_29
+      rect:
+        serializedVersion: 2
+        x: 1466
+        y: 902
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86a296616012bf740800000000000000
+      internalID: 5186775705876769384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_30
+      rect:
+        serializedVersion: 2
+        x: 1466
+        y: 590
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93e0a1beabbdd7970800000000000000
+      internalID: 8754394846532865593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_31
+      rect:
+        serializedVersion: 2
+        x: 1466
+        y: 510
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99b9a56eee027e3d0800000000000000
+      internalID: -3177534801647592551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_32
+      rect:
+        serializedVersion: 2
+        x: 1466
+        y: 502
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fc597538c0541090800000000000000
+      internalID: -8064732211892888335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_33
+      rect:
+        serializedVersion: 2
+        x: 1466
+        y: 494
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d114b286c1cf96940800000000000000
+      internalID: 5290036436260307229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_34
+      rect:
+        serializedVersion: 2
+        x: 2110
+        y: 266
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 098897d7b06432cd0800000000000000
+      internalID: -2584144746016831344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_35
+      rect:
+        serializedVersion: 2
+        x: 2122
+        y: 266
+        width: 17
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af7fcb26892edbea0800000000000000
+      internalID: -5855274796392318982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_36
+      rect:
+        serializedVersion: 2
+        x: 2158
+        y: 266
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c3befab7bfa49600800000000000000
+      internalID: 474197064431875017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_37
+      rect:
+        serializedVersion: 2
+        x: 2166
+        y: 266
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a911452b5020f1be0800000000000000
+      internalID: -1504481527028510310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_38
+      rect:
+        serializedVersion: 2
+        x: 2326
+        y: 266
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b98678ab1b1e9f0e0800000000000000
+      internalID: -2235507586557843301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 78f62ce1292a9a845be742072cc3f7e2
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_0: 6145399305079088909
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_1: 6693383568252616183
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_10: 353523833341264155
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_11: -329243720895015417
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_12: 1663652548764921738
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_13: -2428524642877910380
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_14: 3174815874005930387
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_15: -3388279473168021389
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_16: -8152467964360684423
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_17: -3041283105013194522
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_18: 3282133190230023189
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_19: -6010040347378473714
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_2: -4274566592520166919
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_20: 3320720813093487656
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_21: 327991291391895576
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_22: 4649928834901534463
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_23: -4642876432510151331
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_24: -3170041354148106008
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_25: -7567020726860182978
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_26: -516354908782884194
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_27: -6643300259835679093
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_28: -2513668177206584331
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_29: 5186775705876769384
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_3: -6670050043230394251
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_30: 8754394846532865593
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_31: -3177534801647592551
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_32: -8064732211892888335
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_33: 5290036436260307229
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_34: -2584144746016831344
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_35: -5855274796392318982
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_36: 474197064431875017
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_37: -1504481527028510310
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_38: -2235507586557843301
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_4: -4875810209909383575
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_5: 566281771323301474
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_6: 6000532631238230422
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_7: -8846179659981032355
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_8: -2554995527199044867
+      Gemini_Generated_Image_ietasfietasfieta (1)_upscayl_4x_upscayl-standard-4x_9: 4788727032023545734
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

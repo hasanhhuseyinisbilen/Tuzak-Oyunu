@@ -19,4 +19,16 @@ public class SawMoveLeft : MonoBehaviour
     {
         isActivated = true;
     }
+        public void Deactivate()
+    {
+        isActivated = false;
+    }
+
+    public void SetSpeed(float newSpeed, float newRotation)
+    {
+        speed = newSpeed;
+        rotationSpeed = newRotation;
+    }
+
+  
 }

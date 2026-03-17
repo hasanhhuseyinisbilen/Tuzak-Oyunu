@@ -13,7 +13,6 @@ public class PlayerMovement2D : MonoBehaviour
 
     float moveInput;
     bool jumpRequested;
-    bool isGrounded;
 
     [Header("Ground Check")]
     public float groundCheckDistance = 0.2f;
@@ -27,6 +26,12 @@ public class PlayerMovement2D : MonoBehaviour
 
     float coyoteTime = 0.1f;
     float coyoteTimeCounter;
+
+    [Header("Görünüş Ayarları")]
+    [SerializeField] private bool faceRightAtStart = true;
+    [SerializeField] private bool spriteFacingLeftByDefault = true;
+
+    private Vector3 initialScale;
 
     void OnEnable()
     {
@@ -46,46 +51,71 @@ public class PlayerMovement2D : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>(); 
         rb.freezeRotation = true;
+        
+        initialScale = transform.localScale;
+
+        // Başlangıçta sağa mı baksın?
+        if (faceRightAtStart)
+        {
+            transform.localScale = new Vector3(spriteFacingLeftByDefault ? -initialScale.x : initialScale.x, initialScale.y, initialScale.z);
+        }
+
+        // --- AUDIO LISTENER KONTROLÜ ---
+        // Eğer sahnede kamerada zaten bir listener varsa ve karakterde de varsa, karakterdekini sustur
+        AudioListener[] listeners = FindObjectsOfType<AudioListener>();
+        if (listeners.Length > 1)
+        {
+            AudioListener playerListener = GetComponent<AudioListener>();
+            if (playerListener != null)
+            {
+                Destroy(playerListener);
+                Debug.Log("Fazlalık AudioListener karakterden silindi!");
+            }
+        }
+
+        // --- GROUND LAYER KONTROLÜ ---
+        if (groundLayer == 0)
+        {
+            Debug.LogWarning("DİKKAT: 'Ground Layer' seçilmemiş! Player (Inspector) üzerinden katman seçmelisin.");
+        }
     }
+
+    [Header("Debug")]
+    public bool isGrounded; // Inspector'dan görmek için public yaptık
 
     void Update()
     {
         moveInput = move.ReadValue<float>();
 
-    
-        if (moveInput > 0.1f)
-            transform.localScale = new Vector3(1, 1, 1);
-        else if (moveInput < -0.1f)
-            transform.localScale = new Vector3(-1, 1, 1);
+        if (moveInput > 0.1f) // Sağa git
+        {
+            transform.localScale = new Vector3(spriteFacingLeftByDefault ? -initialScale.x : initialScale.x, initialScale.y, initialScale.z);
+        }
+        else if (moveInput < -0.1f) // Sola git
+        {
+            transform.localScale = new Vector3(spriteFacingLeftByDefault ? initialScale.x : -initialScale.x, initialScale.y, initialScale.z);
+        }
 
-
-
-
+        // Yer Kontrolü (Ground Check) - LAYERSIZ VERSİYON
         Bounds bounds = col.bounds;
-        
         float extraHeight = 0.1f;
         Vector2 boxCenter = new Vector2(bounds.center.x, bounds.min.y - extraHeight / 2);
         Vector2 boxSize = new Vector2(bounds.size.x * 0.9f, extraHeight);
 
-
-        int hitCount = Physics2D.OverlapBoxNonAlloc(boxCenter, boxSize, 0, groundHits, groundLayer);
-        
+        // Herhangi bir şeye çarpıyor mu bak (Layer sildik)
+        Collider2D[] results = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0f);
         isGrounded = false;
-        for (int i = 0; i < hitCount; i++)
+        
+        foreach (var hitCollider in results)
         {
-            var h = groundHits[i];
-            if (h.gameObject != gameObject && !h.isTrigger)
+            // Kendimize veya tetikleyici (trigger) objelere çarpmıyorsak yerdedir
+            if (hitCollider.gameObject != gameObject && !hitCollider.isTrigger)
             {
                 isGrounded = true;
                 break;
             }
         }
 
-    
- 
-        Debug.DrawLine(new Vector3(bounds.min.x, bounds.min.y, 0), new Vector3(bounds.max.x, bounds.min.y, 0));
-        Debug.DrawLine(new Vector3(bounds.min.x, bounds.min.y - extraHeight, 0), new Vector3(bounds.max.x, bounds.min.y - extraHeight, 0));
-        
         if (isGrounded)
             coyoteTimeCounter = coyoteTime;
         else
@@ -93,26 +123,105 @@ public class PlayerMovement2D : MonoBehaviour
 
         if (jump.WasPressedThisFrame())
         {
+            if (!isGrounded) Debug.Log("Zıplama basıldı ama yer algılanmadı!");
+            else Debug.Log("Zıplama OK! (YERDE)");
+            
             jumpBufferCounter = jumpBufferTime;
         }
         else
         {
             jumpBufferCounter -= Time.deltaTime;
         }
+
+        // Görsel debug
+        Color rayColor = isGrounded ? Color.green : Color.red;
+        Debug.DrawLine(new Vector3(boxCenter.x - boxSize.x/2, boxCenter.y + boxSize.y/2, 0), new Vector3(boxCenter.x + boxSize.x/2, boxCenter.y + boxSize.y/2, 0), rayColor);
+        Debug.DrawLine(new Vector3(boxCenter.x - boxSize.x/2, boxCenter.y - boxSize.y/2, 0), new Vector3(boxCenter.x + boxSize.x/2, boxCenter.y - boxSize.y/2, 0), rayColor);
     }
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        // Kaygan zemin kontrolü (Tag üzerinden)
+        bool isOnSlippery = false;
+        if (isGrounded)
+        {
+            Bounds bounds = col.bounds;
+            float extraHeight = 0.15f;
+            Vector2 boxCenter = new Vector2(bounds.center.x, bounds.min.y - extraHeight / 2);
+            Vector2 boxSize = new Vector2(bounds.size.x * 0.8f, extraHeight);
+            Collider2D[] results = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0f);
+            
+            foreach (var hit in results)
+            {
+                if (hit.gameObject != gameObject && !hit.isTrigger && hit.CompareTag("Slippery"))
+                {
+                    isOnSlippery = true;
+                    break;
+                }
+            }
+        }
+
+        if (!isOnSlippery)
+        {
+            // Orijinal keskin hareket
+            rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        }
+        else
+        {
+            // Kaygan zemin hareketi (SÜPER HIZLI ve PATİNAJLI)
+            float slipperySpeedMultiplier = 2.0f; // 2 Kat Hız!
+            float targetX = moveInput * (moveSpeed * slipperySpeedMultiplier);
+            
+            float speedDiff = targetX - rb.linearVelocity.x;
+            float movement;
+
+            if (Mathf.Abs(moveInput) > 0.01f)
+            {
+                // Zıt yöne mi basıyoruz? (Patinaj kontrolü)
+                bool isTurning = (moveInput > 0 && rb.linearVelocity.x < -0.1f) || (moveInput < 0 && rb.linearVelocity.x > 0.1f);
+                
+                if (isTurning)
+                {
+                    // PATİNAJ: Zıt yöne basınca karakter hemen dönemez, çok yavaş yavaşlar (0.8f çarpanı)
+                    movement = speedDiff * 0.8f; 
+                }
+                else
+                {
+                    // HIZLANMA: Agresif fırlama (Hemen o hıza ulaşmak ister)
+                    movement = speedDiff * 20f; 
+                }
+            }
+            else
+            {
+                // DURMA: Sabun gibi kayma (0.4f çarpanı)
+                movement = speedDiff * 0.4f; 
+            }
+
+            rb.AddForce(new Vector2(movement, 0), ForceMode2D.Force);
+            
+            // Maksimum hız sınırı (Çok uçmaması için)
+            float maxSlipperySpeed = moveSpeed * slipperySpeedMultiplier;
+            if (Mathf.Abs(rb.linearVelocity.x) > maxSlipperySpeed)
+            {
+                rb.linearVelocity = new Vector2(Mathf.Sign(rb.linearVelocity.x) * maxSlipperySpeed, rb.linearVelocity.y);
+            }
+        }
 
     
-        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
+        // Zıplama Kontrolü: Kaygan zeminde zıplama kapalı!
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f && !isOnSlippery)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
             jumpBufferCounter = 0f;
             coyoteTimeCounter = 0f; 
+        }
+        else if (jumpBufferCounter > 0f && isOnSlippery)
+        {
+            // Buzda zıplamaya çalışınca ufak bir mesaj veya görsel efekt eklenebilir
+            // Şu an sadece zıplamayı yutuyoruz.
+            jumpBufferCounter = 0f; 
         }
     }
 }

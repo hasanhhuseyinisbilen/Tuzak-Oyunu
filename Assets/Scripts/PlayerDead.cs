@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerDead : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerDead : MonoBehaviour
     private bool isDead = false;
 
     private Rigidbody2D rb;
-    private SnowyLevelManager levelManager;
+    // private SnowyLevelManager levelManager;
 
     // Tag Constants
     private const string TAG_TRAP = "Trap";
@@ -20,7 +21,7 @@ public class PlayerDead : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        levelManager = FindObjectOfType<SnowyLevelManager>();
+        // levelManager = FindObjectOfType<SnowyLevelManager>();
     }
 
     void Update()
@@ -63,13 +64,16 @@ public class PlayerDead : MonoBehaviour
 
         isDead = true;
 
-        if (LivesManager.Instance != null)
-            LivesManager.Instance.LoseLife();
+        /* if (LivesManager.Instance != null)
+            LivesManager.Instance.LoseLife(); */
 
-        if (levelManager != null)
-            levelManager.RestartLevel();
+        /* if (levelManager != null)
+            levelManager.RestartLevel(); */
 
         if (rb != null)
-            rb.velocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
+
+        // Mevcut bölümü baştan yükle
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
