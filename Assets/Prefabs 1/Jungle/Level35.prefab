@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7117732161559105006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1199087474562408627}
+  - component: {fileID: 2840564365164427971}
+  m_Layer: 0
+  m_Name: Level35
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1199087474562408627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7117732161559105006}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1698.026, y: 659.9985, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4035387690078433672}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2840564365164427971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7117732161559105006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa65f4e6481fb042a117057f5bfd7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Level35Generator
+  groundPrefab: {fileID: 7086380373451445067, guid: b4458c959a162644bbdd96d3420cb91f, type: 3}
+  groundCount: 10
+  wallPrefab: {fileID: 1196453306316611161, guid: 58978ac69e4793046af448c405ab4b33, type: 3}
+  wallColumns: 3
+  wallRows: 8
+  wallYOffset: -150
+  movingWoodYOffset: 70
+  ceilingPrefab: {fileID: 3079426378451717553, guid: f4a6c0bc0c42f9b439135d846806bf42, type: 3}
+  ceilingYOffset: 500
+  mushroomPrefab: {fileID: 7777957023746358842, guid: e829d75865a519b4f92f8fb971de7112, type: 3}
+  playerPrefab: {fileID: 8973928939802508522, guid: 2965fa1e16455d849be458dd6d43f363, type: 3}
+  finishMushroomPrefab: {fileID: 7777957023746358842, guid: 5b550b9d6ed8b2d4faae839057cde004, type: 3}
+  groundSpikePrefab: {fileID: 878132781189637974, guid: f9bad2e69cdc0204bbe095585bfdea29, type: 3}
+  woodPrefab: {fileID: 5954427754027192534, guid: 9cee9089f3816db4bbc553d37f9e330e, type: 3}
+  movingWoodPrefab: {fileID: 5954427754027192534, guid: 3a29ee62d0106e1408eac0bf90bfe77c, type: 3}
+  leftTrampolinePrefab: {fileID: 7577184798665357556, guid: 5759e3d05aa182e4ebc96d370f5996de, type: 3}
+  hidingSpikePrefab: {fileID: 878132781189637974, guid: 8574dfce35c4ff24d947dbc3b6630f41, type: 3}
+--- !u!1001 &3483671013738242565
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1199087474562408627}
+    m_Modifications:
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1062.8179
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -443.92487
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3317401425594685819, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_Name
+      value: JungleBg
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+--- !u!4 &4035387690078433672 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+  m_PrefabInstance: {fileID: 3483671013738242565}
+  m_PrefabAsset: {fileID: 0}

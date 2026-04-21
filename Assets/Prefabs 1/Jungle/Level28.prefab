@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4578926745365919804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2498400086725716294}
+  - component: {fileID: 3392180481403354154}
+  m_Layer: 0
+  m_Name: Level28
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2498400086725716294
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578926745365919804}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3392180481403354154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578926745365919804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d73910646f3c0794eb1cedb1b758251c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Level28Generator
+  groundPrefab: {fileID: 7086380373451445067, guid: b4458c959a162644bbdd96d3420cb91f, type: 3}
+  wallPrefab: {fileID: 1196453306316611161, guid: 58978ac69e4793046af448c405ab4b33, type: 3}
+  mushroomPrefab: {fileID: 7777957023746358842, guid: e829d75865a519b4f92f8fb971de7112, type: 3}
+  playerPrefab: {fileID: 8973928939802508522, guid: bc91fe44c649f014897aeeb82f0ade81, type: 3}
+  ceilingPrefab: {fileID: 3079426378451717553, guid: f4a6c0bc0c42f9b439135d846806bf42, type: 3}
+  greenSmokePrefab: {fileID: 6604080173382620403, guid: 3f4756fa1c741924283cb1ae409ad192, type: 3}
+  platformPrefab: {fileID: 4101208026220145563, guid: e43af3468749a0642a54633196e5a376, type: 3}
+  spikePrefab: {fileID: 878132781189637974, guid: 42a6d7afa75504d4a96e8e15a97c4955, type: 3}
+  sawPrefab: {fileID: 5997519039823815260, guid: d38efcb01c4a29049a92a983bdb2b54f, type: 3}
+  totalWidthInBlocks: 20
+  wallRows: 5
+  wallColumns: 3
+  wallYOffset: -150
+  ceilingHeight: 300
+  platformYOffset: 150
+  expansionTime: 60

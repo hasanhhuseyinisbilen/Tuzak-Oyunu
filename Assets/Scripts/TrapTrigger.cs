@@ -22,7 +22,6 @@ public class TrapTrigger : MonoBehaviour
         }
     }
 
-    // Tuzağın tekrar tetiklenmesi gerekiyorsa bu sıfırlanabilir
     public void ResetTrigger()
     {
         hasTriggered = false;

@@ -21,6 +21,7 @@ public class Level12Generator : MonoBehaviour
     [SerializeField] private GameObject ceilingSpikePrefab;
     [SerializeField] private GameObject startIglooPrefab;
     [SerializeField] private GameObject finishIglooPrefab;
+    [SerializeField] private GameObject boxPrefab;
 
     private bool canGenerate = true;
 
@@ -29,7 +30,7 @@ public class Level12Generator : MonoBehaviour
         if (groundPrefab == null || roomGroundPrefab == null || wallPrefab == null || 
             ceilingPrefab == null || playerPrefab == null || elevatorPrefab == null || 
             ledgeSpikePrefab == null || ledgeSawPrefab == null || ceilingSpikePrefab == null || 
-            startIglooPrefab == null || finishIglooPrefab == null)
+            startIglooPrefab == null || finishIglooPrefab == null || boxPrefab == null)
         {
             Debug.LogError("DİKKAT: Level12Generator içinde eksik prefab var!");
             canGenerate = false;
@@ -52,25 +53,29 @@ public class Level12Generator : MonoBehaviour
         {
             float xPos = (i * groundHalfWidth * 2) + groundHalfWidth;
 
-            if (i == 0)
+            switch (i)
             {
-                Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
-                GenerateWalls(0, true, 16);
+                case 0:
+                    Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+                    GenerateWalls(0, true, 16);
 
-                float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
-                Instantiate(startIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
+                    float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
+                    Instantiate(startIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
 
-                float playerHalfHeight = GetHalfHeight(playerPrefab);
-                Instantiate(playerPrefab, new Vector3(xPos, topY + playerHalfHeight, 0), Quaternion.identity);
-            }
-            else if (i == 2)
-            {
-                Instantiate(elevatorPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
-            }
+                    float playerHalfHeight = GetHalfHeight(playerPrefab);
+                    Instantiate(playerPrefab, new Vector3(xPos, topY + playerHalfHeight, 0), Quaternion.identity);
+                    break;
 
-            if (i == totalWidthInBlocks - 1)
-            {
-                GenerateSpecialRightWall(totalWidthInBlocks * groundHalfWidth * 2);
+                case 2:
+                    Instantiate(elevatorPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+                    break;
+
+                default:
+                    if (i == totalWidthInBlocks - 1)
+                    {
+                        GenerateSpecialRightWall(totalWidthInBlocks * groundHalfWidth * 2);
+                    }
+                    break;
             }
         }
     }
@@ -82,44 +87,39 @@ public class Level12Generator : MonoBehaviour
         float roomWidth = wallColumns * wallHalfWidth * 2;
         float wallStartX = xOrigin + roomWidth;
 
-        // Ana Sağ Kule (16 sıra)
         GenerateWalls(wallStartX, false, 16);
 
         int currentRow = 0;
-        // 1. Taban (3 sıra tam duvar)
         for (int r = 0; r < 3; r++) PlaceWallRow(xOrigin, currentRow++, wallHalfWidth, wallHalfHeight);
         
-        // 2. 1. Odacık Zemini (Diken ile)
         PlaceGroundRow(xOrigin, currentRow, wallHalfWidth, wallHalfHeight, 2, ledgeSpikePrefab);
-        // 1. Odacık Testeresi (Hesaplama hatası düzeltildi: Zemin yüzeyinden 1 birim yukarı)
         float roomGHH = GetHalfHeight(roomGroundPrefab);
         float sawHH = GetHalfHeight(ledgeSawPrefab);
         float sawY1 = wallYOffset + (currentRow * wallHalfHeight * 2) + (roomGHH * 2) + sawHH + 1.0f;
         Instantiate(ledgeSawPrefab, new Vector3(wallStartX, sawY1, 0), Quaternion.identity);
         currentRow++;
         
-        // 3. 1. Odacık Boşluğu
         currentRow++; 
 
-        // 4. Ara Kat Tavanı ve Duvarları
         PlaceCeilingRow(xOrigin, currentRow, wallHalfWidth, wallHalfHeight, new int[] {7, 8, 9, 10}, ceilingSpikePrefab);
         for (int r = 0; r < 3; r++) PlaceWallRow(xOrigin, currentRow++, wallHalfWidth, wallHalfHeight);
 
-        // 5. 2. Odacık Zemini
         PlaceGroundRow(xOrigin, currentRow, wallHalfWidth, wallHalfHeight);
-        // 2. Odacık Testeresi (Hesaplama hatası düzeltildi: Zemin yüzeyinden 1 birim yukarı)
+        
+        float boxHH = GetHalfHeight(boxPrefab);
+        float boxHW = GetHalfWidth(boxPrefab);
+        float boxY = wallYOffset + (currentRow * wallHalfHeight * 2) + (roomGHH * 2) + boxHH;
+        Instantiate(boxPrefab, new Vector3(wallStartX + boxHW, boxY, 0), Quaternion.identity);
+
         float sawY2 = wallYOffset + (currentRow * wallHalfHeight * 2) + (roomGHH * 2) + sawHH + 1.0f;
         Instantiate(ledgeSawPrefab, new Vector3(wallStartX, sawY2, 0), Quaternion.identity);
         currentRow++;
         
-        // 6. 2. Odacık Boşluğu
         currentRow++;
 
-        // 7. En Üst Tavan ve Tepe Duvarları
         PlaceCeilingRow(xOrigin, currentRow, wallHalfWidth, wallHalfHeight, null, null);
         for (int r = 0; r < 2; r++) PlaceWallRow(xOrigin, currentRow++, wallHalfWidth, wallHalfHeight);
 
-        // Bitiş İglosu (2. Odacıktan sonraki kule yapısının en tepesinde)
         float nicheTopY = wallYOffset + (currentRow * wallHalfHeight * 2);
         float iglooHalfH = GetHalfHeight(finishIglooPrefab);
         Instantiate(finishIglooPrefab, new Vector3(xOrigin + wallHalfWidth, nicheTopY + iglooHalfH, 0), Quaternion.identity);

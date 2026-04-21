@@ -19,15 +19,15 @@ public class Level9Generator : MonoBehaviour
     [Header("Obje Ayarları")]
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject startIglooPrefab;
-    [SerializeField] private GameObject finishIglooPrefab;
+  
     [SerializeField] private GameObject startPlatformPrefab;
     [SerializeField] private GameObject boxPrefab;
     [SerializeField] private GameObject spikePrefab;
     
     [Header("Level 9 Özel Ayarlar")]
-    [SerializeField] private float boxXOffset = 2f; // Kutunun platformun bitişinden olan uzaklığı
-    [SerializeField] private float boxYOffset = 0f; // Kutunun dikey ofseti
-    [SerializeField] private float finishIglooXOffset = 0f; // Yeni: Bitiş iglosunun kutu üzerindeki yatay ofseti
+    [SerializeField] private float boxXOffset = 2f; 
+    [SerializeField] private float boxYOffset = 0f; 
+    [SerializeField] private float finishIglooXOffset = 0f; 
     [SerializeField] private GameObject trampolinePrefab;
 
     private bool canGenerate = true;
@@ -35,7 +35,7 @@ public class Level9Generator : MonoBehaviour
     void Awake()
     {
         if (groundPrefab == null || ceilingPrefab == null || wallPrefab == null || 
-            playerPrefab == null || startIglooPrefab == null || finishIglooPrefab == null || 
+            playerPrefab == null || startIglooPrefab == null || 
             startPlatformPrefab == null || boxPrefab == null || spikePrefab == null || 
             trampolinePrefab == null)
         {
@@ -66,65 +66,66 @@ public class Level9Generator : MonoBehaviour
             Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
             Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset, 0), Quaternion.identity);
 
-            if (i == 0)
+            switch (i)
             {
-                GenerateWalls(0, true);
+                case 0:
+                    GenerateWalls(0, true);
 
-                if (startPlatformPrefab != null)
-                {
-                    float platHalfWidth = GetHalfWidth(startPlatformPrefab);
-                    float platHalfHeight = GetHalfHeight(startPlatformPrefab);
-                    
-                    float platX = platHalfWidth; 
-                    float platY = topY + platHalfHeight;
-                    
-                    Instantiate(startPlatformPrefab, new Vector3(platX, platY, 0), Quaternion.identity);
-                    
-                    platformTopSurfaceY = platY + platHalfHeight;
-                    platformEndX = platX + platHalfWidth;
+                    if (startPlatformPrefab != null)
+                    {
+                        float platHalfWidth = GetHalfWidth(startPlatformPrefab);
+                        float platHalfHeight = GetHalfHeight(startPlatformPrefab);
+                        
+                        float platX = platHalfWidth; 
+                        float platY = topY + platHalfHeight;
+                        
+                        Instantiate(startPlatformPrefab, new Vector3(platX, platY, 0), Quaternion.identity);
+                        
+                        platformTopSurfaceY = platY + platHalfHeight;
+                        platformEndX = platX + platHalfWidth;
 
-                    // Kutunun ve Bitiş İglosunun Yerleşimi
-                    float boxHalfWidth = GetHalfWidth(boxPrefab);
-                    float boxHalfHeight = GetHalfHeight(boxPrefab);
-                    
-                    float boxX = platformEndX + boxXOffset + boxHalfWidth;
-                    float boxY = (platformTopSurfaceY + boxYOffset) - boxHalfHeight;
-                    
-                    Instantiate(boxPrefab, new Vector3(boxX, boxY, 0), Quaternion.identity);
+                        // Kutunun ve Bitiş İglosunun Yerleşimi
+                        float boxHalfWidth = GetHalfWidth(boxPrefab);
+                        float boxHalfHeight = GetHalfHeight(boxPrefab);
+                        
+                        float boxX = platformEndX + boxXOffset + boxHalfWidth;
+                        float boxY = (platformTopSurfaceY + boxYOffset) - boxHalfHeight;
+                        
+                        Instantiate(boxPrefab, new Vector3(boxX, boxY, 0), Quaternion.identity);
 
-                    float iglooHalfHeight = GetHalfHeight(finishIglooPrefab);
-                    Instantiate(finishIglooPrefab, new Vector3(boxX + finishIglooXOffset, (platformTopSurfaceY + boxYOffset) + iglooHalfHeight, 0), Quaternion.identity);
-                }
+                    }
 
-                float playerHalfHeight = GetHalfHeight(playerPrefab);
-                float playerX = GetHalfWidth(startPlatformPrefab);
-                Instantiate(playerPrefab, new Vector3(playerX, platformTopSurfaceY + playerHalfHeight, 0), Quaternion.identity);
+                    float playerHalfHeight = GetHalfHeight(playerPrefab);
+                    float playerX = GetHalfWidth(startPlatformPrefab);
+                    Instantiate(playerPrefab, new Vector3(playerX, platformTopSurfaceY + playerHalfHeight, 0), Quaternion.identity);
 
-                float startIglooHalfHeight = GetHalfHeight(startIglooPrefab);
-                Instantiate(startIglooPrefab, new Vector3(playerX, platformTopSurfaceY + startIglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
-            }
+                    float startIglooHalfHeight = GetHalfHeight(startIglooPrefab);
+                    Instantiate(startIglooPrefab, new Vector3(playerX, platformTopSurfaceY + startIglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
+                    break;
 
-            // Sondan 3. ve 4. zeminlerdeki 3'lü diken paterni
-            if (i == groundCount - 3 || i == groundCount - 4)
-            {
-                float sHalfWidth = GetHalfWidth(spikePrefab);
-                float sHalfHeight = GetHalfHeight(spikePrefab);
-                
-                // 3 Dikeni yan yana diz (Pozisyonu ground merkezine göre ayarlı)
-                float startSpikeX = xPos - (sHalfWidth * 2); 
-                for (int d = 0; d < 3; d++)
-                {
-                    Instantiate(spikePrefab, new Vector3(startSpikeX + (d * sHalfWidth * 2), topY + sHalfHeight, 0), Quaternion.identity);
-                }
-            }
+                default:
+                    // Sondan 3. ve 4. zeminlerdeki 3'lü diken paterni
+                    if (i == groundCount - 3 || i == groundCount - 4)
+                    {
+                        float sHalfWidth = GetHalfWidth(spikePrefab);
+                        float sHalfHeight = GetHalfHeight(spikePrefab);
+                        
+                        float startSpikeX = xPos - (sHalfWidth * 2); 
+                        for (int d = 0; d < 3; d++)
+                        {
+                            Instantiate(spikePrefab, new Vector3(startSpikeX + (d * sHalfWidth * 2), topY + sHalfHeight, 0), Quaternion.identity);
+                        }
+                    }
 
-            if (i == groundCount - 1)
-            {
-                GenerateWalls(groundCount * groundHalfWidth * 2, false);
+                    if (i == groundCount - 1)
+                    {
+                        GenerateWalls(groundCount * groundHalfWidth * 2, false);
 
-                // Trambolin
-                float trampHalfHeight = GetHalfHeight(trampolinePrefab);
-                Instantiate(trampolinePrefab, new Vector3(xPos, topY + trampHalfHeight, 0), Quaternion.identity);
+                        // Trambolin
+                        float trampHalfHeight = GetHalfHeight(trampolinePrefab);
+                        Instantiate(trampolinePrefab, new Vector3(xPos, topY + trampHalfHeight, 0), Quaternion.identity);
+                    }
+                    break;
             }
         }
     }

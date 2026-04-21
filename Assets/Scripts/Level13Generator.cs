@@ -21,6 +21,7 @@ public class Level13Generator : MonoBehaviour
     [SerializeField] private GameObject boxPrefab; 
     [SerializeField] private GameObject elevatorBoxPrefab; 
     [SerializeField] private GameObject spikePrefab;
+    [SerializeField] private GameObject ceilingSpikePrefab;
     [SerializeField] private GameObject startIglooPrefab;
     [SerializeField] private GameObject finishIglooPrefab;
 
@@ -31,7 +32,7 @@ public class Level13Generator : MonoBehaviour
         if (groundPrefab == null || wallPrefab == null || ceilingPrefab == null || 
             playerPrefab == null || trampolinePrefab == null || trampoline2Prefab == null || 
             boxPrefab == null || elevatorBoxPrefab == null || spikePrefab == null || 
-            startIglooPrefab == null || finishIglooPrefab == null)
+            ceilingSpikePrefab == null || startIglooPrefab == null || finishIglooPrefab == null)
         {
             Debug.LogError("DİKKAT: Level13Generator içinde eksik prefab var!");
             canGenerate = false;
@@ -60,70 +61,73 @@ public class Level13Generator : MonoBehaviour
                 Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
             }
 
-            if (i == 0)
+            switch (i)
             {
-                GenerateWalls(0, true, wallHeight);
+                case 0:
+                    GenerateWalls(0, true, wallHeight);
 
-                float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
-                Instantiate(startIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
+                    float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
+                    Instantiate(startIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
 
-                float playerHalfHeight = GetHalfHeight(playerPrefab);
-                float playerXPos = xPos + GetHalfWidth(startIglooPrefab) + GetHalfWidth(playerPrefab);
-                Instantiate(playerPrefab, new Vector3(playerXPos, topY + playerHalfHeight, 0), Quaternion.identity);
-            }
-            
-            if (i == 1)
-            {
-                float trampHalfH = GetHalfHeight(trampolinePrefab);
-                Instantiate(trampolinePrefab, new Vector3(xPos, topY + trampHalfH, 0), Quaternion.identity);
-            }
-
-            if (i == 3)
-            {
-                float trampHalfH = GetHalfHeight(trampoline2Prefab);
-                float trampHalfW = GetHalfWidth(trampoline2Prefab);
-                Instantiate(trampoline2Prefab, new Vector3(xPos, topY + trampHalfH, 0), Quaternion.identity);
-
-                float spikeHalfW = GetHalfWidth(spikePrefab);
-                float spikeHalfH = GetHalfHeight(spikePrefab);
-                float trampEndX = xPos + trampHalfW;
-
-                for (int j = 0; j < 5; j++)
-                {
-                    float spikeX = trampEndX + (j * spikeHalfW * 2) + spikeHalfW;
-                    Instantiate(spikePrefab, new Vector3(spikeX, topY + spikeHalfH, 0), Quaternion.identity);
-                }
-            }
-            
-            if (i == 6 || i == 8 || i == 10)
-            {
-                int step = (i == 6) ? 1 : (i == 8) ? 2 : 3;
-                float boxHalfH = GetHalfHeight(boxPrefab);
-                float boxY = topY + (step * groundHalfHeight * 2) + boxHalfH;
+                    float playerHalfHeight = GetHalfHeight(playerPrefab);
+                    float playerXPos = xPos + GetHalfWidth(startIglooPrefab) + GetHalfWidth(playerPrefab);
+                    Instantiate(playerPrefab, new Vector3(playerXPos, topY + playerHalfHeight, 0), Quaternion.identity);
+                    break;
                 
-                GameObject prefabToUse = (i == 8) ? elevatorBoxPrefab : boxPrefab;
-                GameObject boxObj = Instantiate(prefabToUse, new Vector3(xPos, boxY, 0), Quaternion.identity);
+                case 1:
+                    float trampHalfH = GetHalfHeight(trampolinePrefab);
+                    Instantiate(trampolinePrefab, new Vector3(xPos, topY + trampHalfH, 0), Quaternion.identity);
+                    break;
 
-                if (i == 8)
-                {
-                    RisingBoxElevator elevator = boxObj.GetComponent<RisingBoxElevator>();
-                    if (elevator == null) elevator = boxObj.AddComponent<RisingBoxElevator>();
+                case 3:
+                    float tramp2HalfH = GetHalfHeight(trampoline2Prefab);
+                    float trampHalfW = GetHalfWidth(trampoline2Prefab);
+                    Instantiate(trampoline2Prefab, new Vector3(xPos, topY + tramp2HalfH, 0), Quaternion.identity);
+
+                    float spikeHalfW = GetHalfWidth(spikePrefab);
+                    float spikeHalfH = GetHalfHeight(spikePrefab);
+                    float trampEndX = xPos + trampHalfW;
+
+                    for (int j = 0; j < 5; j++)
+                    {
+                        float spikeX = trampEndX + (j * spikeHalfW * 2) + spikeHalfW;
+                        Instantiate(spikePrefab, new Vector3(spikeX, topY + spikeHalfH, 0), Quaternion.identity);
+                    }
+                    break;
+                
+                case 6:
+                case 8:
+                case 10:
+                    int step = (i == 6) ? 1 : (i == 8) ? 2 : 3;
+                    float boxHalfH = GetHalfHeight(boxPrefab);
+                    float boxY = topY + (step * groundHalfHeight * 2) + boxHalfH;
                     
-                    float finishX = ((totalWidthInBlocks - 1) * groundHalfWidth * 2) + groundHalfWidth;
-                    float finishY = (3 * groundHalfHeight * 2) + groundHalfHeight + boxHalfH; 
-                    elevator.SetTarget(new Vector3(finishX, finishY, 0));
-                }
-            }
+                    GameObject prefabToUse = (i == 8) ? elevatorBoxPrefab : boxPrefab;
+                    GameObject boxObj = Instantiate(prefabToUse, new Vector3(xPos, boxY, 0), Quaternion.identity);
 
-            if (i == totalWidthInBlocks - 1)
-            {
-                float targetGroundY = 3 * groundHalfHeight * 2; 
-                Instantiate(groundPrefab, new Vector3(xPos, targetGroundY, 0), Quaternion.identity);
+                    if (i == 8)
+                    {
+                        RisingBoxElevator elevator = boxObj.GetComponent<RisingBoxElevator>();
+                        if (elevator == null) elevator = boxObj.AddComponent<RisingBoxElevator>();
+                        
+                        float finishX = ((totalWidthInBlocks - 1) * groundHalfWidth * 2) + groundHalfWidth;
+                        float finishY = (3 * groundHalfHeight * 2) + groundHalfHeight + boxHalfH; 
+                        elevator.SetTarget(new Vector3(finishX, finishY, 0));
+                    }
+                    break;
 
-                GenerateWalls(totalWidthInBlocks * groundHalfWidth * 2, false, wallHeight);
+                default:
+                    if (i == totalWidthInBlocks - 1)
+                    {
+                        float targetGroundY = 3 * groundHalfHeight * 2; 
+                        Instantiate(groundPrefab, new Vector3(xPos, targetGroundY, 0), Quaternion.identity);
 
-                float finishHalfHeight = GetHalfHeight(finishIglooPrefab);
-                Instantiate(finishIglooPrefab, new Vector3(xPos, targetGroundY + groundHalfHeight + finishHalfHeight, 0), Quaternion.identity);
+                        GenerateWalls(totalWidthInBlocks * groundHalfWidth * 2, false, wallHeight);
+
+                        float finishHalfHeight = GetHalfHeight(finishIglooPrefab);
+                        Instantiate(finishIglooPrefab, new Vector3(xPos, targetGroundY + groundHalfHeight + finishHalfHeight, 0), Quaternion.identity);
+                    }
+                    break;
             }
         }
 
@@ -162,6 +166,20 @@ public class Level13Generator : MonoBehaviour
         {
             Instantiate(ceilingPrefab, new Vector3(currentX + ceilingHalfWidth, topY, 0), Quaternion.identity);
             currentX += ceilingHalfWidth * 2;
+        }
+
+        if (ceilingSpikePrefab != null)
+        {
+            float spikeHalfW = GetHalfWidth(ceilingSpikePrefab);
+            float spikeHalfH = GetHalfHeight(ceilingSpikePrefab);
+            float startX = ceilingHalfWidth * 2;
+            
+            for (int j = 0; j < 5; j++)
+            {
+                float x = startX + (j * spikeHalfW * 2) + spikeHalfW;
+                float y = ceilingY - spikeHalfH;
+                Instantiate(ceilingSpikePrefab, new Vector3(x, y, 0), Quaternion.identity);
+            }
         }
     }
 

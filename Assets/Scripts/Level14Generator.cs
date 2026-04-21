@@ -24,6 +24,8 @@ public class Level14Generator : MonoBehaviour
     [SerializeField] private GameObject startPlatformPrefab;
     [SerializeField] private GameObject boxPrefab;
     [SerializeField] private GameObject spikyBoxPrefab; 
+    [SerializeField] private GameObject housePrefab;
+    [SerializeField] private GameObject pineTreePrefab;
     [SerializeField] private float boxDistance = 0f;
 
     private bool canGenerate = true;
@@ -60,72 +62,101 @@ public class Level14Generator : MonoBehaviour
             float xPos = (i * groundHalfWidth * 2) + groundHalfWidth;
             
             Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+            Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset, 0), Quaternion.identity);
 
-            // Tavan ve Tavan Dikenleri
-            if (ceilingPrefab != null)
+            switch (i)
             {
-                Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset, 0), Quaternion.identity);
+                case 0:
+                    GenerateWalls(0, true);
+                    float pWHalfWidth = GetHalfWidth(startPlatformPrefab);
+                    Instantiate(startPlatformPrefab, new Vector3(pWHalfWidth, topY + platHalfHeight, 0), Quaternion.identity);
 
-                if (i >= 6 && i < 11)
-                {
-                    float spikeHalfW = GetHalfWidth(ceilingSpikePrefab);
-                    float spikeHalfH = GetHalfHeight(ceilingSpikePrefab);
-                    float ceilingHalfH = GetHalfHeight(ceilingPrefab);
-                    
-                    float blockStartX = i * groundHalfWidth * 2;
-                    int spikesInBlock = Mathf.FloorToInt((groundHalfWidth * 2) / (spikeHalfW * 2));
+                    float boxHalfWidth = GetHalfWidth(boxPrefab);
+                    float boxHalfHeight = GetHalfHeight(boxPrefab);
+                    float boxX = (pWHalfWidth * 2) + boxHalfWidth + boxDistance;
+                    float boxY = platformTopSurfaceY - boxHalfHeight;
+                    Instantiate(boxPrefab, new Vector3(boxX, boxY, 0), Quaternion.identity);
 
-                    for (int s = 0; s < spikesInBlock; s++)
+                    float playerHalfHeight = GetHalfHeight(playerPrefab);
+                    float playerX = pWHalfWidth + GetHalfWidth(startIglooPrefab) + GetHalfWidth(playerPrefab);
+                    Instantiate(playerPrefab, new Vector3(playerX, platformTopSurfaceY + playerHalfHeight, 0), Quaternion.identity);
+
+                    float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
+                    Instantiate(startIglooPrefab, new Vector3(pWHalfWidth, platformTopSurfaceY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
+
+                    if (housePrefab != null)
                     {
-                        float spikeX = blockStartX + (s * spikeHalfW * 2) + spikeHalfW;
-                        float ceilingBottomY = ceilingYOffset - ceilingHalfH;
-                        float finalSpikeY = ceilingBottomY - spikeHalfH;
+                        float houseHalfWidth = GetHalfWidth(housePrefab);
+                        float houseHalfHeight = GetHalfHeight(housePrefab);
+                        float houseX = (pWHalfWidth * 2) + houseHalfWidth;
+                        Instantiate(housePrefab, new Vector3(houseX, topY + houseHalfHeight, 0), Quaternion.identity);
 
-                        Instantiate(ceilingSpikePrefab, new Vector3(spikeX, finalSpikeY, 0), Quaternion.identity);
+                        if (pineTreePrefab != null)
+                        {
+                            float treeHalfWidth = GetHalfWidth(pineTreePrefab);
+                            float treeHalfHeight = GetHalfHeight(pineTreePrefab);
+                            float currentTreeX = houseX + houseHalfWidth + treeHalfWidth;
+
+                            for (int t = 0; t < 25; t++)
+                            {
+                                Instantiate(pineTreePrefab, new Vector3(currentTreeX, topY + treeHalfHeight, 0), Quaternion.identity);
+                                currentTreeX += treeHalfWidth * 2f; 
+                            }
+                        }
                     }
-                }
-            }
+                    break;
 
-            if (i == 0)
-            {
-                GenerateWalls(0, true);
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    if (ceilingSpikePrefab != null)
+                    {
+                        float spikeHalfW = GetHalfWidth(ceilingSpikePrefab);
+                        float spikeHalfH = GetHalfHeight(ceilingSpikePrefab);
+                        float ceilingHalfH = GetHalfHeight(ceilingPrefab);
+                        
+                        float blockStartX = i * groundHalfWidth * 2;
+                        int spikesInBlock = Mathf.FloorToInt((groundHalfWidth * 2) / (spikeHalfW * 2));
 
-                // Platform
-                float platHalfWidth = GetHalfWidth(startPlatformPrefab);
-                Instantiate(startPlatformPrefab, new Vector3(platHalfWidth, topY + platHalfHeight, 0), Quaternion.identity);
+                        for (int s = 0; s < spikesInBlock; s++)
+                        {
+                            float spikeX = blockStartX + (s * spikeHalfW * 2) + spikeHalfW;
+                            float ceilingBottomY = ceilingYOffset - ceilingHalfH;
+                            float finalSpikeY = ceilingBottomY - spikeHalfH;
 
-                // Platform yanındaki Kutu
-                float boxHalfWidth = GetHalfWidth(boxPrefab);
-                float boxHalfHeight = GetHalfHeight(boxPrefab);
-                float boxX = (platHalfWidth * 2) + boxHalfWidth + boxDistance;
-                float boxY = platformTopSurfaceY - boxHalfHeight;
-                Instantiate(boxPrefab, new Vector3(boxX, boxY, 0), Quaternion.identity);
+                            Instantiate(ceilingSpikePrefab, new Vector3(spikeX, finalSpikeY, 0), Quaternion.identity);
+                        }
+                    }
+        
+                 if (i == groundCount - 1)
+                 {
+                    GenerateFinish(xPos);
+                 }
+                 break;
 
-                // Player
-                float playerHalfHeight = GetHalfHeight(playerPrefab);
-                float playerX = platHalfWidth + GetHalfWidth(startIglooPrefab) + GetHalfWidth(playerPrefab);
-                Instantiate(playerPrefab, new Vector3(playerX, platformTopSurfaceY + playerHalfHeight, 0), Quaternion.identity);
-
-                // Igloo
-                float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
-                Instantiate(startIglooPrefab, new Vector3(platHalfWidth, platformTopSurfaceY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
-            }
-
-            if (i == groundCount - 1)
-            {
-                float rightWallX = groundCount * groundHalfWidth * 2;
-                GenerateWalls(rightWallX, false);
-
-                // Bitiş İglosu
-                float finishHalfHeight = GetHalfHeight(finishIglooPrefab);
-                Instantiate(finishIglooPrefab, new Vector3(xPos, topY + finishHalfHeight, 0), Quaternion.identity);
-
-                // Dikenli Kutu (Duvarın içinde)
-                float boxHalfWidth = GetHalfWidth(spikyBoxPrefab);
-                float boxHalfHeight = GetHalfHeight(spikyBoxPrefab);
-                Instantiate(spikyBoxPrefab, new Vector3(rightWallX + boxHalfWidth, topY + boxHalfHeight, 0), Quaternion.identity);
+                default:
+                    if (i == groundCount - 1)
+                    {
+                        GenerateFinish(xPos);
+                    }
+                    break;
             }
         }
+    }
+
+    private void GenerateFinish(float xPos)
+    {
+        float topY = GetHalfHeight(groundPrefab);
+        float rightWallX = groundCount * GetHalfWidth(groundPrefab) * 2;
+        GenerateWalls(rightWallX, false);
+
+        float finishHalfHeight = GetHalfHeight(finishIglooPrefab);
+        Instantiate(finishIglooPrefab, new Vector3(xPos, topY + finishHalfHeight, 0), Quaternion.identity);
+
+        float bHalfWidth = GetHalfWidth(spikyBoxPrefab);
+        float bHalfHeight = GetHalfHeight(spikyBoxPrefab);
+        Instantiate(spikyBoxPrefab, new Vector3(rightWallX + bHalfWidth, topY + bHalfHeight, 0), Quaternion.identity);
     }
 
     private void GenerateWalls(float xOrigin, bool isLeft)

@@ -6,10 +6,6 @@ public class Level6Generator : MonoBehaviour
     [SerializeField] private GameObject groundPrefab;
     [SerializeField] private int groundCount = 10;
 
-    [Header("Tavan Ayarları")]
-    [SerializeField] private GameObject ceilingPrefab;
-    [SerializeField] private float ceilingYOffset = 5f;
-
     [Header("Duvar Ayarları")]
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private int wallColumns = 3;
@@ -24,12 +20,13 @@ public class Level6Generator : MonoBehaviour
     [SerializeField] private GameObject trapPrefab;
     [SerializeField] private float trapYOffset = 0f;
     [SerializeField] private GameObject ground6SpikePrefab;
+    [SerializeField] private GameObject bgPrefab;
 
     private bool canGenerate = true;
 
     void Awake()
     {
-        if (groundPrefab == null || ceilingPrefab == null || wallPrefab == null || 
+        if (groundPrefab == null || wallPrefab == null || 
             playerPrefab == null || iglooPrefab == null || finishIglooPrefab == null || 
             startPlatformPrefab == null || trapPrefab == null || ground6SpikePrefab == null)
         {
@@ -50,7 +47,36 @@ public class Level6Generator : MonoBehaviour
         float groundHalfHeight = GetHalfHeight(groundPrefab);
         float topY = groundHalfHeight;
 
-        // Platform üst yüzey seviyesi
+        if (bgPrefab != null)
+        {
+            float bgW = GetHalfWidth(bgPrefab) * 2;
+            float bgH = GetHalfHeight(bgPrefab) * 2;
+            float totalLevelWidth = groundCount * (groundHalfWidth * 2);
+            
+            // Kullanıcı isteği üzerine yatayda sabit 2 adet arka plan
+            int xCount = 2;
+            // Dikeyde yer altını (-15) ve gökyüzünü (+25) kapsayacak şekilde yakalıyoruz
+            int yCount = Mathf.CeilToInt(40f / bgH); 
+
+            for (int k = 0; k < xCount; k++)
+            {
+                for (int j = 0; j < yCount; j++)
+                {
+                    // -10f'den başlayarak yatayda diziyoruz
+                    float bgX = -10f + (k * bgW) + (bgW / 2f);
+                    // -15'ten başlayarak dikeyde diziyoruz
+                    float bgY = -15f + (j * bgH) + (bgH / 2f);
+                    
+                    // Seams (ek yerleri) için her ikinci arka planı ters çeviriyoruz
+                    Quaternion rotation = (k % 2 == 1) ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
+                    
+                    GameObject bg = Instantiate(bgPrefab, new Vector3(bgX, bgY, 10f), rotation);
+                    bg.name = $"BG_{k}_{j}";
+                    bg.transform.parent = this.transform;
+                }
+            }
+        }
+
         float platformTopSurfaceY = topY + (GetHalfHeight(startPlatformPrefab) * 2);
 
         for (int i = 0; i < groundCount; i++)
@@ -58,47 +84,43 @@ public class Level6Generator : MonoBehaviour
             float xPos = (i * groundHalfWidth * 2) + groundHalfWidth;
             
             Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
-            Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset, 0), Quaternion.identity);
 
-            if (i == 0)
+            switch (i)
             {
-                GenerateWalls(0, true);
+                case 0:
+                    GenerateWalls(0, true);
 
-                // Platform
-                float platHalfWidth = GetHalfWidth(startPlatformPrefab);
-                float platHalfHeight = GetHalfHeight(startPlatformPrefab);
-                Instantiate(startPlatformPrefab, new Vector3(platHalfWidth, topY + platHalfHeight, 0), Quaternion.identity);
+                    float platHalfWidth = GetHalfWidth(startPlatformPrefab);
+                    float platHalfHeight = GetHalfHeight(startPlatformPrefab);
+                    Instantiate(startPlatformPrefab, new Vector3(platHalfWidth, topY + platHalfHeight, 0), Quaternion.identity);
 
-                // Igloo (Platform üstünde)
-                float iglooHalfHeight = GetHalfHeight(iglooPrefab);
-                Instantiate(iglooPrefab, new Vector3(platHalfWidth, platformTopSurfaceY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
+                    float iglooHalfHeight = GetHalfHeight(iglooPrefab);
+                    Instantiate(iglooPrefab, new Vector3(platHalfWidth, platformTopSurfaceY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
 
-                // Player (Igloo önünde)
-                float playerHalfHeight = GetHalfHeight(playerPrefab);
-                float playerXPos = platHalfWidth + GetHalfWidth(iglooPrefab) + GetHalfWidth(playerPrefab);
-                Instantiate(playerPrefab, new Vector3(playerXPos, platformTopSurfaceY + playerHalfHeight, 0), Quaternion.identity);
-            }
+                    float playerHalfHeight = GetHalfHeight(playerPrefab);
+                    float playerXPos = platHalfWidth + GetHalfWidth(iglooPrefab) + GetHalfWidth(playerPrefab);
+                    Instantiate(playerPrefab, new Vector3(playerXPos, platformTopSurfaceY + playerHalfHeight, 0), Quaternion.identity);
+                    break;
 
-            if (i == groundCount - 1)
-            {
-                float iglooHalfHeight = GetHalfHeight(finishIglooPrefab);
-                Instantiate(finishIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.identity);
-                GenerateWalls(groundCount * groundHalfWidth * 2, false);
-            }
+                case 3:
+                    float trapHalfHeight = GetHalfHeight(trapPrefab);
+                    float trapY = platformTopSurfaceY + trapHalfHeight + trapYOffset;
+                    Instantiate(trapPrefab, new Vector3(xPos, trapY, 0), Quaternion.identity);
+                    break;
 
-            // Kapan Tuzağı
-            if (i == 3)
-            {
-                float trapHalfHeight = GetHalfHeight(trapPrefab);
-                float trapY = platformTopSurfaceY + trapHalfHeight + trapYOffset;
-                Instantiate(trapPrefab, new Vector3(xPos, trapY, 0), Quaternion.identity);
-            }
+                case 6:
+                    float spikeHalfHeight = GetHalfHeight(ground6SpikePrefab);
+                    Instantiate(ground6SpikePrefab, new Vector3(xPos, topY + spikeHalfHeight, 0), Quaternion.identity);
+                    break;
 
-            // Özel Diken
-            if (i == 6)
-            {
-                float spikeHalfHeight = GetHalfHeight(ground6SpikePrefab);
-                Instantiate(ground6SpikePrefab, new Vector3(xPos, topY + spikeHalfHeight, 0), Quaternion.identity);
+                default:
+                    if (i == groundCount - 1)
+                    {
+                        float finishIglooHalfHeight = GetHalfHeight(finishIglooPrefab);
+                        Instantiate(finishIglooPrefab, new Vector3(xPos, topY + finishIglooHalfHeight, 0), Quaternion.identity);
+                        GenerateWalls(groundCount * groundHalfWidth * 2, false);
+                    }
+                    break;
             }
         }
     }

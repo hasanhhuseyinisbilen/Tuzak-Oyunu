@@ -4,12 +4,6 @@ using UnityEngine.SceneManagement;
 public class LevelEnd : MonoBehaviour
 {
     private bool triggered = false;
-    // private SnowyLevelManager manager;
-
-    private void Start()
-    {
-        // manager = FindObjectOfType<SnowyLevelManager>();
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -18,15 +12,37 @@ public class LevelEnd : MonoBehaviour
 
         triggered = true;
 
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = currentSceneIndex + 1;
+        int currentLevel = PlayerPrefs.GetInt("CurrentPlayingLevel", 1);
+        int nextLevel = currentLevel + 1;
 
-        int reachedLevel = PlayerPrefs.GetInt("ReachedLevel", 1);
-        if (nextSceneIndex > reachedLevel)
+        int unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        if (nextLevel > unlockedLevel)
         {
-            PlayerPrefs.SetInt("ReachedLevel", nextSceneIndex);
+            PlayerPrefs.SetInt("UnlockedLevel", nextLevel);
             PlayerPrefs.Save();
+            Debug.Log($"<color=green>TEBRİKLER!</color> Bölüm {currentLevel} Geçildi. Bölüm {nextLevel} kilidi açıldı!");
         }
-        SceneManager.LoadScene(0);
+
+        ReturnToMenu();
+    }
+
+    private void ReturnToMenu()
+    {
+        int currentLevel = PlayerPrefs.GetInt("CurrentPlayingLevel", 1);
+        
+        if (currentLevel >= 20 && currentLevel <= 40)
+        {
+            SceneManager.LoadScene("JungleLevel");
+            return;
+        }
+
+        if (LevelManager.Instance != null && !string.IsNullOrEmpty(LevelManager.Instance.levelSelectorSceneName))
+        {
+            SceneManager.LoadScene(LevelManager.Instance.levelSelectorSceneName);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }

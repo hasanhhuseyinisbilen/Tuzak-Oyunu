@@ -9,59 +9,70 @@ public class PlayerMovement2D : MonoBehaviour
     public InputAction move;
     public InputAction jump;
 
-    Rigidbody2D rb;
+    public static PlayerMovement2D Instance;
+    
+    private Rigidbody2D rb;
+    private Collider2D col;
+    private Vector3 initialScale;
 
-    float moveInput;
-    bool jumpRequested;
+    [Header("Giriş Durumu")]
+    [SerializeField] private float moveInput;
+    [SerializeField] private float mobileMoveInput;
+    private bool mobileJumpRequested;
+    private bool jumpRequested;
+    private float launchTimer;
 
     [Header("Ground Check")]
     public float groundCheckDistance = 0.2f;
     public LayerMask groundLayer;
     public Transform groundCheckTransform;
-    
+    public bool isGrounded;
 
-    float jumpBufferTime = 0.1f;
-    float jumpBufferCounter;
-
-
-    float coyoteTime = 0.1f;
-    float coyoteTimeCounter;
+    private float jumpBufferTime = 0.1f;
+    private float jumpBufferCounter;
+    private float coyoteTime = 0.1f;
+    private float coyoteTimeCounter;
 
     [Header("Görünüş Ayarları")]
     [SerializeField] private bool faceRightAtStart = true;
     [SerializeField] private bool spriteFacingLeftByDefault = true;
 
-    private Vector3 initialScale;
+    [Header("Ses Ayarları")]
+    [SerializeField] private AudioClip walkClip;
+    private AudioSource audioSource;
+    private Animator animator;
 
     void OnEnable()
     {
         move.Enable();
         jump.Enable();
     }
-    private void OnDisable() {
+
+    void OnDisable()
+    {
         move.Disable();
         jump.Disable();
     }
 
-    private Collider2D col;
-    private Collider2D[] groundHits = new Collider2D[10];
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>(); 
+        animator = GetComponent<Animator>();
         rb.freezeRotation = true;
         
         initialScale = transform.localScale;
 
-        // Başlangıçta sağa mı baksın?
         if (faceRightAtStart)
         {
             transform.localScale = new Vector3(spriteFacingLeftByDefault ? -initialScale.x : initialScale.x, initialScale.y, initialScale.z);
         }
 
-        // --- AUDIO LISTENER KONTROLÜ ---
-        // Eğer sahnede kamerada zaten bir listener varsa ve karakterde de varsa, karakterdekini sustur
         AudioListener[] listeners = FindObjectsOfType<AudioListener>();
         if (listeners.Length > 1)
         {
@@ -69,47 +80,53 @@ public class PlayerMovement2D : MonoBehaviour
             if (playerListener != null)
             {
                 Destroy(playerListener);
-                Debug.Log("Fazlalık AudioListener karakterden silindi!");
             }
         }
 
-        // --- GROUND LAYER KONTROLÜ ---
-        if (groundLayer == 0)
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
         {
-            Debug.LogWarning("DİKKAT: 'Ground Layer' seçilmemiş! Player (Inspector) üzerinden katman seçmelisin.");
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
+        audioSource.playOnAwake = false;
+        audioSource.clip = walkClip;
+        audioSource.loop = true;
     }
-
-    [Header("Debug")]
-    public bool isGrounded; // Inspector'dan görmek için public yaptık
 
     void Update()
     {
-        moveInput = move.ReadValue<float>();
-
-        if (moveInput > 0.1f) // Sağa git
+        PlayerDead deadScript = GetComponent<PlayerDead>();
+        if (deadScript != null && deadScript.isDead)
         {
-            transform.localScale = new Vector3(spriteFacingLeftByDefault ? -initialScale.x : initialScale.x, initialScale.y, initialScale.z);
-        }
-        else if (moveInput < -0.1f) // Sola git
-        {
-            transform.localScale = new Vector3(spriteFacingLeftByDefault ? initialScale.x : -initialScale.x, initialScale.y, initialScale.z);
+            if (audioSource != null && audioSource.isPlaying && audioSource.clip == walkClip)
+            {
+                audioSource.Stop();
+            }
+            if (animator != null) animator.speed = 0;
+            return;
         }
 
-        // Yer Kontrolü (Ground Check) - LAYERSIZ VERSİYON
+        float keyboardInput = move.ReadValue<float>();
+        moveInput = Mathf.Clamp(keyboardInput + mobileMoveInput, -1f, 1f);
+
+        if (Mathf.Abs(moveInput) > 0.1f)
+        {
+            float targetX = (moveInput > 0) ? (spriteFacingLeftByDefault ? -1 : 1) : (spriteFacingLeftByDefault ? 1 : -1);
+            transform.localScale = new Vector3(targetX * Mathf.Abs(initialScale.x), initialScale.y, initialScale.z);
+        }
+
         Bounds bounds = col.bounds;
-        float extraHeight = 0.1f;
-        Vector2 boxCenter = new Vector2(bounds.center.x, bounds.min.y - extraHeight / 2);
-        Vector2 boxSize = new Vector2(bounds.size.x * 0.9f, extraHeight);
+        float checkDepth = 0.4f;
+        Vector2 boxCenter = new Vector2(bounds.center.x, bounds.min.y - checkDepth / 2);
+        Vector2 boxSize = new Vector2(bounds.size.x * 0.9f, checkDepth);
 
-        // Herhangi bir şeye çarpıyor mu bak (Layer sildik)
-        Collider2D[] results = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0f);
-        isGrounded = false;
+        LayerMask maskToUse = (groundLayer == 0) ? ~0 : groundLayer;
+        Collider2D[] choices = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0f, maskToUse);
         
-        foreach (var hitCollider in results)
+        isGrounded = false;
+        foreach (var choice in choices)
         {
-            // Kendimize veya tetikleyici (trigger) objelere çarpmıyorsak yerdedir
-            if (hitCollider.gameObject != gameObject && !hitCollider.isTrigger)
+            if (choice.gameObject != gameObject && !choice.isTrigger)
             {
                 isGrounded = true;
                 break;
@@ -121,35 +138,34 @@ public class PlayerMovement2D : MonoBehaviour
         else
             coyoteTimeCounter -= Time.deltaTime;
 
-        if (jump.WasPressedThisFrame())
+        if (jump.WasPressedThisFrame() || mobileJumpRequested)
         {
-            if (!isGrounded) Debug.Log("Zıplama basıldı ama yer algılanmadı!");
-            else Debug.Log("Zıplama OK! (YERDE)");
-            
             jumpBufferCounter = jumpBufferTime;
+            mobileJumpRequested = false;
         }
         else
         {
             jumpBufferCounter -= Time.deltaTime;
         }
 
-        // Görsel debug
-        Color rayColor = isGrounded ? Color.green : Color.red;
-        Debug.DrawLine(new Vector3(boxCenter.x - boxSize.x/2, boxCenter.y + boxSize.y/2, 0), new Vector3(boxCenter.x + boxSize.x/2, boxCenter.y + boxSize.y/2, 0), rayColor);
-        Debug.DrawLine(new Vector3(boxCenter.x - boxSize.x/2, boxCenter.y - boxSize.y/2, 0), new Vector3(boxCenter.x + boxSize.x/2, boxCenter.y - boxSize.y/2, 0), rayColor);
+        if (launchTimer > 0) launchTimer -= Time.deltaTime;
+
+        UpdateAnimations();
+        UpdateWalkingSound();
     }
 
     void FixedUpdate()
     {
-        // Kaygan zemin kontrolü (Tag üzerinden)
+        PlayerDead deadScript = GetComponent<PlayerDead>();
+        if (deadScript != null && deadScript.isDead) return;
+
         bool isOnSlippery = false;
         if (isGrounded)
         {
             Bounds bounds = col.bounds;
-            float extraHeight = 0.15f;
-            Vector2 boxCenter = new Vector2(bounds.center.x, bounds.min.y - extraHeight / 2);
-            Vector2 boxSize = new Vector2(bounds.size.x * 0.8f, extraHeight);
-            Collider2D[] results = Physics2D.OverlapBoxAll(boxCenter, boxSize, 0f);
+            Vector2 sBoxSize = new Vector2(bounds.size.x * 0.8f, 0.4f);
+            Vector2 sBoxCenter = new Vector2(bounds.center.x, bounds.min.y - 0.2f);
+            Collider2D[] results = Physics2D.OverlapBoxAll(sBoxCenter, sBoxSize, 0f);
             
             foreach (var hit in results)
             {
@@ -161,67 +177,88 @@ public class PlayerMovement2D : MonoBehaviour
             }
         }
 
-        if (!isOnSlippery)
+        if (launchTimer <= 0)
         {
-            // Orijinal keskin hareket
-            rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
-        }
-        else
-        {
-            // Kaygan zemin hareketi (SÜPER HIZLI ve PATİNAJLI)
-            float slipperySpeedMultiplier = 2.0f; // 2 Kat Hız!
-            float targetX = moveInput * (moveSpeed * slipperySpeedMultiplier);
-            
-            float speedDiff = targetX - rb.linearVelocity.x;
-            float movement;
-
-            if (Mathf.Abs(moveInput) > 0.01f)
+            if (!isOnSlippery)
             {
-                // Zıt yöne mi basıyoruz? (Patinaj kontrolü)
-                bool isTurning = (moveInput > 0 && rb.linearVelocity.x < -0.1f) || (moveInput < 0 && rb.linearVelocity.x > 0.1f);
-                
-                if (isTurning)
-                {
-                    // PATİNAJ: Zıt yöne basınca karakter hemen dönemez, çok yavaş yavaşlar (0.8f çarpanı)
-                    movement = speedDiff * 0.8f; 
-                }
-                else
-                {
-                    // HIZLANMA: Agresif fırlama (Hemen o hıza ulaşmak ister)
-                    movement = speedDiff * 20f; 
-                }
+                rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
             }
             else
             {
-                // DURMA: Sabun gibi kayma (0.4f çarpanı)
-                movement = speedDiff * 0.4f; 
+                float targetX = moveInput * (moveSpeed * 2.0f);
+                float currentX = rb.linearVelocity.x;
+                float accel = (Mathf.Abs(moveInput) > 0.01f) ? 25f : 5f;
+                float newX = Mathf.Lerp(currentX, targetX, accel * Time.fixedDeltaTime);
+                rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
             }
+        }
 
-            rb.AddForce(new Vector2(movement, 0), ForceMode2D.Force);
-            
-            // Maksimum hız sınırı (Çok uçmaması için)
-            float maxSlipperySpeed = moveSpeed * slipperySpeedMultiplier;
-            if (Mathf.Abs(rb.linearVelocity.x) > maxSlipperySpeed)
+        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
+        {
+            if (!isOnSlippery)
             {
-                rb.linearVelocity = new Vector2(Mathf.Sign(rb.linearVelocity.x) * maxSlipperySpeed, rb.linearVelocity.y);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                
+                if (animator != null)
+                {
+                    animator.SetTrigger("Jump");
+                }
+
+                jumpBufferCounter = 0f;
+                coyoteTimeCounter = 0f;
+            }
+            else
+            {
+                jumpBufferCounter = 0f;
             }
         }
+    }
 
-    
-        // Zıplama Kontrolü: Kaygan zeminde zıplama kapalı!
-        if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f && !isOnSlippery)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    private void UpdateAnimations()
+    {
+        if (animator == null) return;
 
-            jumpBufferCounter = 0f;
-            coyoteTimeCounter = 0f; 
-        }
-        else if (jumpBufferCounter > 0f && isOnSlippery)
+        animator.SetBool("isGrounded", isGrounded);
+        animator.SetFloat("speed", Mathf.Abs(moveInput));
+        animator.SetFloat("yVelocity", rb.linearVelocity.y);
+    }
+
+    private void UpdateWalkingSound()
+    {
+        if (walkClip == null || audioSource == null) return;
+
+        bool isMoving = isGrounded && Mathf.Abs(moveInput) > 0.1f;
+
+        if (isMoving)
         {
-            // Buzda zıplamaya çalışınca ufak bir mesaj veya görsel efekt eklenebilir
-            // Şu an sadece zıplamayı yutuyoruz.
-            jumpBufferCounter = 0f; 
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
         }
+        else
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
+    }
+
+    public void SetMobileMoveInput(float value)
+    {
+        mobileMoveInput = value;
+    }
+
+    public void MobileJumpDown()
+    {
+        mobileJumpRequested = true;
+    }
+
+    public void ApplyLaunch(Vector2 force, float duration)
+    {
+        launchTimer = duration;
+        rb.linearVelocity = force;
     }
 }

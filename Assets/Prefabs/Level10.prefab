@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Level10Generator
   groundPrefab: {fileID: 438238441397727655, guid: cf83eb01134f3c148bc02e376cb7b7b5, type: 3}
   trapGroundPrefab: {fileID: 438238441397727655, guid: 199984405db9a664cb8f645e234b9d2e, type: 3}
-  groundCount: 10
+  groundCount: 12
   trapGroundY: 100
   ceilingPrefab: {fileID: 5846803965801207199, guid: 06735e7f05a4def47abc14b459ffce2c, type: 3}
   ceilingYOffset: 200
@@ -59,3 +59,4 @@ MonoBehaviour:
   trapTrampolinePrefab: {fileID: 3541020326800696340, guid: 4a4317efa6e10124683553aa02ef817e, type: 3}
   startIglooPrefab: {fileID: 2947701974701523213, guid: cc2deb62fd6e80e45808305f284d0c4b, type: 3}
   finishIglooPrefab: {fileID: 2947701974701523213, guid: 40f2de6186386d141b89882a0093f691, type: 3}
+  bgPrefab: {fileID: 1188470352208465100, guid: ed05e1153b4907d4f9ec9a23b7fcf443, type: 3}

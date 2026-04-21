@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Trap
-  - Slippery
+  - Gas
+  - Ball
   layers:
   - Default
   - TransparentFX

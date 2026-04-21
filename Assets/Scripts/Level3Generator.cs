@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Level3Generator : MonoBehaviour
 {
-    [Header("Zemin ve Kutu Ayarları")]
     [SerializeField] private GameObject groundPrefab;
     [SerializeField] private GameObject groundSpikePrefab;
     [SerializeField] private GameObject boxPrefab;
@@ -13,20 +12,16 @@ public class Level3Generator : MonoBehaviour
     [SerializeField] private int startGroundCount = 2;
     [SerializeField] private int middleBoxCount = 7;
     [SerializeField] private int endGroundCount = 2;
-    [SerializeField] private float boxGap = 2f;
-
-    [Header("Tavan Ayarları")]
+    [SerializeField] private float boxGap = 4f;
     [SerializeField] private GameObject ceilingPrefab;
     [SerializeField] private float ceilingYOffset = 5f;
-
-    [Header("Duvar Ayarları")]
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private int wallColumns = 3;
     [SerializeField] private int wallRows = 6;
     [SerializeField] private float wallYOffset = 0f;
-
-    [Header("Oyuncu Ayarları")]
     [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject waterPrefab;
+    [SerializeField] private float waterYOffset = -2f;
 
     private bool canGenerate = true;
 
@@ -35,9 +30,8 @@ public class Level3Generator : MonoBehaviour
         if (groundPrefab == null || groundSpikePrefab == null || boxPrefab == null || 
             specialBoxPrefab == null || lastBoxPrefab == null || iglooPrefab == null || 
             finishIglooPrefab == null || ceilingPrefab == null || wallPrefab == null || 
-            playerPrefab == null)
+            playerPrefab == null || waterPrefab == null)
         {
-            Debug.LogError("DİKKAT: Level3Generator içinde eksik prefab var!");
             canGenerate = false;
             enabled = false;
         }
@@ -56,98 +50,106 @@ public class Level3Generator : MonoBehaviour
         float boxHalfWidth = GetHalfWidth(boxPrefab);
         float topY = groundHalfHeight;
 
-        // 1. Başlangıç Zeminleri
-        for (int i = 0; i < startGroundCount; i++)
+        int totalItems = startGroundCount + middleBoxCount + endGroundCount;
+
+        if (waterPrefab != null)
         {
-            float xPos = currentX + groundHalfWidth;
-            Instantiate(groundSpikePrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
-
-            if (i == 0)
-            {
-                // Duvarlar
-                GenerateWalls(currentX, true);
-
-                // Igloo
-                float iglooHalfHeight = GetHalfHeight(iglooPrefab);
-                Instantiate(iglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
-
-                // Player
-                float playerHalfHeight = GetHalfHeight(playerPrefab);
-                float playerXPos = xPos + GetHalfWidth(iglooPrefab) + GetHalfWidth(playerPrefab);
-                Instantiate(playerPrefab, new Vector3(playerXPos, topY + playerHalfHeight, 0), Quaternion.identity);
-            }
-
-            currentX += groundHalfWidth * 2;
-        }
-
-        // 2. Orta Kutular (Aralıklı)
-        for (int i = 0; i < middleBoxCount; i++)
-        {
-            currentX += boxGap;
-            float xPos = currentX + boxHalfWidth;
+            float waterStartX = startGroundCount * (groundHalfWidth * 2f);
+            float boxSectionWidth = middleBoxCount * (boxGap + (boxHalfWidth * 2f));
+            float waterHalfW = GetHalfWidth(waterPrefab);
+            float waterFullW = waterHalfW * 2f;
+            float waterHalfH = GetHalfHeight(waterPrefab);
+            float waterFullH = waterHalfH * 2f;
             
-            if (i == middleBoxCount - 2)
-            {
-                Instantiate(specialBoxPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
-            }
-            else if (i == middleBoxCount - 1)
-            {
-                Instantiate(lastBoxPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
-            }
-            else
-            {
-                Instantiate(boxPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
-            }
+            int waterTilesCount = Mathf.CeilToInt(boxSectionWidth / waterFullW) + 1; 
 
-            currentX += boxHalfWidth * 2;
+            for (int k = 0; k < waterTilesCount; k++)
+            {
+                float wx = waterStartX + (k * waterFullW) + waterHalfW;
+                
+                // Ust sira (Animasyonlu)
+                GameObject waterTop = Instantiate(waterPrefab, new Vector3(wx, waterYOffset, 0), Quaternion.identity);
+                waterTop.AddComponent<WaterAnimation>();
+
+                // Alt sira
+                Instantiate(waterPrefab, new Vector3(wx, waterYOffset - waterFullH, 0), Quaternion.identity);
+            }
         }
 
-        // 3. Bitiş Zeminleri
-        currentX += boxGap;
-        for (int i = 0; i < endGroundCount; i++)
+        for (int i = 0; i < totalItems; i++)
         {
-            float xPos = currentX + groundHalfWidth;
-            Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+            float xPos = 0;
 
-            if (i == endGroundCount - 1)
+            switch (i)
             {
-                // Bitiş İglosu
-                float iglooHalfHeight = GetHalfHeight(finishIglooPrefab);
-                Instantiate(finishIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.identity);
+                case int n when (n < startGroundCount):
+                    xPos = currentX + groundHalfWidth;
+                    Instantiate(groundSpikePrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+                    if (n == 0)
+                    {
+                        GenerateWalls(currentX, true);
+                        float igHalf = GetHalfHeight(iglooPrefab);
+                        Instantiate(iglooPrefab, new Vector3(xPos, topY + igHalf, 0), Quaternion.Euler(0, 180, 0));
+                        float pHalf = GetHalfHeight(playerPrefab);
+                        float pX = xPos + GetHalfWidth(iglooPrefab) + GetHalfWidth(playerPrefab);
+                        Instantiate(playerPrefab, new Vector3(pX, topY + pHalf, 0), Quaternion.identity);
+                    }
+                    currentX += groundHalfWidth * 2;
+                    break;
 
-                // Sağ Duvarlar
-                GenerateWalls(currentX + (groundHalfWidth * 2), false);
+                case int n when (n >= startGroundCount && n < startGroundCount + middleBoxCount):
+                    currentX += boxGap;
+                    
+                    xPos = currentX + boxHalfWidth;
+                    int boxIdx = n - startGroundCount;
+                    
+                    if (boxIdx == middleBoxCount - 2)
+                        Instantiate(specialBoxPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+                    else if (boxIdx == middleBoxCount - 1)
+                        Instantiate(lastBoxPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+                    else
+                        Instantiate(boxPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+                    
+                    currentX += boxHalfWidth * 2;
+                    break;
+
+                case int n when (n >= startGroundCount + middleBoxCount):
+                    if (n == startGroundCount + middleBoxCount) currentX += boxGap;
+                    
+                    xPos = currentX + groundHalfWidth;
+                    Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+                    
+                    if (n == totalItems - 1)
+                    {
+                        float fHalf = GetHalfHeight(finishIglooPrefab);
+                        Instantiate(finishIglooPrefab, new Vector3(xPos, topY + fHalf, 0), Quaternion.identity);
+                        GenerateWalls(currentX + (groundHalfWidth * 2), false);
+                    }
+                    currentX += groundHalfWidth * 2;
+                    break;
             }
-
-            currentX += groundHalfWidth * 2;
         }
 
-        // 4. KESİNTİSİZ TAVAN
-        float ceilingHalfWidth = GetHalfWidth(ceilingPrefab);
-        int ceilingCount = Mathf.CeilToInt(currentX / (ceilingHalfWidth * 2));
-
-        for (int i = 0; i < ceilingCount; i++)
+        float cHalf = GetHalfWidth(ceilingPrefab);
+        int cCount = Mathf.CeilToInt(currentX / (cHalf * 2));
+        for (int j = 0; j < cCount; j++)
         {
-            float xPos = (i * ceilingHalfWidth * 2) + ceilingHalfWidth;
-            Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset, 0), Quaternion.identity);
+            float cx = (j * cHalf * 2) + cHalf;
+            Instantiate(ceilingPrefab, new Vector3(cx, ceilingYOffset, 0), Quaternion.identity);
         }
     }
 
     private void GenerateWalls(float xOrigin, bool isLeft)
     {
-        float wallHalfWidth = GetHalfWidth(wallPrefab);
-        float wallHalfHeight = GetHalfHeight(wallPrefab);
-
+        float wHalfW = GetHalfWidth(wallPrefab);
+        float wHalfH = GetHalfHeight(wallPrefab);
         for (int col = 0; col < wallColumns; col++)
         {
             for (int row = 0; row < wallRows; row++)
             {
-                float xPos = isLeft ? 
-                    xOrigin - (col * wallHalfWidth * 2) - wallHalfWidth : 
-                    xOrigin + (col * wallHalfWidth * 2) + wallHalfWidth;
-
-                float yPos = wallYOffset + (row * wallHalfHeight * 2) + wallHalfHeight;
-                Instantiate(wallPrefab, new Vector3(xPos, yPos, 0), Quaternion.identity);
+                float px = isLeft ? xOrigin - (col * wHalfW * 2) - wHalfW : xOrigin + (col * wHalfW * 2) + wHalfW;
+                float py = wallYOffset + (row * wHalfH * 2) + wHalfH;
+                Instantiate(wallPrefab, new Vector3(px, py, 0), Quaternion.identity);
             }
         }
     }

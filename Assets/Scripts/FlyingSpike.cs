@@ -32,7 +32,7 @@ public class FlyingSpike : MonoBehaviour
             if (Vector3.Distance(startPos, transform.position) > maxDistance)
             {
                 isFlying = false;
-                // İstersen burada objeyi silebilirsin: Destroy(gameObject);
+           Destroy(gameObject);
             }
         }
     }

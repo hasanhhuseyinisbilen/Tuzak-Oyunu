@@ -18,6 +18,7 @@ public class Level11Generator : MonoBehaviour
     [SerializeField] private GameObject sawRightPrefab;
     [SerializeField] private GameObject sawLeftPrefab;
     [SerializeField] private GameObject topSpikePrefab;
+    [SerializeField] private GameObject finishSpikePrefab;
     [SerializeField] private GameObject startIglooPrefab;
     [SerializeField] private GameObject finishIglooPrefab;
 
@@ -27,7 +28,7 @@ public class Level11Generator : MonoBehaviour
     {
         if (groundPrefab == null || wallPrefab == null || playerPrefab == null || 
             elevatorPrefab == null || sawRightPrefab == null || sawLeftPrefab == null || 
-            topSpikePrefab == null || startIglooPrefab == null || finishIglooPrefab == null)
+            topSpikePrefab == null || finishSpikePrefab == null || startIglooPrefab == null || finishIglooPrefab == null)
         {
             Debug.LogError("DİKKAT: Level11Generator içinde eksik prefab var!");
             canGenerate = false;
@@ -52,49 +53,54 @@ public class Level11Generator : MonoBehaviour
         {
             float xPos = (i * groundHalfWidth * 2) + groundHalfWidth;
 
-            if (i == 0)
+            switch (i)
             {
-                Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
-                GenerateWalls(0, true);
+                case 0:
+                    Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+                    GenerateWalls(0, true);
 
-                float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
-                Instantiate(startIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
+                    float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
+                    Instantiate(startIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
 
-                float playerHalfHeight = GetHalfHeight(playerPrefab);
-                Instantiate(playerPrefab, new Vector3(xPos, topY + playerHalfHeight, 0), Quaternion.identity);
-            }
-            else if (i == 2)
-            {
-                // Asansör
-                Instantiate(elevatorPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+                    float playerHalfHeight = GetHalfHeight(playerPrefab);
+                    Instantiate(playerPrefab, new Vector3(xPos, topY + playerHalfHeight, 0), Quaternion.identity);
+                    break;
 
-                // Testereler
-                float wallHalfHeight = GetHalfHeight(wallPrefab);
-                float sawHeight3 = wallYOffset + (2 * wallHalfHeight * 2) + wallHalfHeight;
-                float sawHeight4 = wallYOffset + (3 * wallHalfHeight * 2) + wallHalfHeight;
+                case 2:
+                        
+                    Instantiate(elevatorPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
 
-                Instantiate(sawRightPrefab, new Vector3(0, sawHeight3, 0), Quaternion.identity);
-                Instantiate(sawLeftPrefab, new Vector3(totalGroundWidth, sawHeight4, 0), Quaternion.identity);
+                    float wallHalfHeight = GetHalfHeight(wallPrefab);
+                    float sawHeight3 = wallYOffset + (2 * wallHalfHeight * 2) + wallHalfHeight;
+                    float sawHeight4 = wallYOffset + (3 * wallHalfHeight * 2) + wallHalfHeight;
 
-                // Asansör üstü diken
-                float wallTopY = wallYOffset + (wallRows * wallHalfHeight * 2);
-                float spikeHalfH = GetHalfHeight(topSpikePrefab);
-                Instantiate(topSpikePrefab, new Vector3(xPos, wallTopY + spikeHalfH, 0), Quaternion.identity);
-            }
+                    Instantiate(sawRightPrefab, new Vector3(0, sawHeight3, 0), Quaternion.identity);
+                    Instantiate(sawLeftPrefab, new Vector3(totalGroundWidth, sawHeight4, 0), Quaternion.identity);
 
-            if (i == totalWidthInBlocks - 1)
-            {
-                float rightWallX = totalGroundWidth;
-                GenerateWalls(rightWallX, false);
+                    float wallTopY = wallYOffset + (wallRows * wallHalfHeight * 2);
+                    float spikeHalfH = GetHalfHeight(topSpikePrefab);
+                    Instantiate(topSpikePrefab, new Vector3(xPos, wallTopY + spikeHalfH, 0), Quaternion.identity);
+                    break;
 
-                // Sağ duvar üstü iglo
-                float wallHalfWidth = GetHalfWidth(wallPrefab);
-                float wallHalfHeight = GetHalfHeight(wallPrefab);
-                float wallTopY = wallYOffset + (wallRows * wallHalfHeight * 2);
-                float finalX = rightWallX + wallHalfWidth;
-                float iglooHalfH = GetHalfHeight(finishIglooPrefab);
-                
-                Instantiate(finishIglooPrefab, new Vector3(finalX, wallTopY + iglooHalfH, 0), Quaternion.identity);
+                case 4:
+                    float rightWallX = totalGroundWidth;
+                    GenerateWalls(rightWallX, false);
+
+                    float wallHalfWidth = GetHalfWidth(wallPrefab);
+                    float wHalfHeight = GetHalfHeight(wallPrefab);
+                    float wTopY = wallYOffset + (wallRows * wHalfHeight * 2);
+
+                    float finalX_spike = rightWallX + wallHalfWidth;
+                    float sHalfH = GetHalfHeight(finishSpikePrefab);
+                    Instantiate(finishSpikePrefab, new Vector3(finalX_spike, wTopY + sHalfH, 0), Quaternion.identity);
+
+                    float finalX_igloo = rightWallX + (3 * wallHalfWidth);
+                    float iglooHalfH = GetHalfHeight(finishIglooPrefab);
+                    Instantiate(finishIglooPrefab, new Vector3(finalX_igloo, wTopY + iglooHalfH, 0), Quaternion.identity);
+                    break;
+
+                default:
+                    break;
             }
         }
     }

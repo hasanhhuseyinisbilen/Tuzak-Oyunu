@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1552875226934680469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4068060579286185180}
+  - component: {fileID: 7727929084618514127}
+  m_Layer: 0
+  m_Name: Level31
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4068060579286185180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552875226934680469}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2037.0466, y: 166.79697, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1890723253423318786}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7727929084618514127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552875226934680469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13adacbcb7d779946bcc931f652fe4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Level31Generator
+  groundPrefab: {fileID: 7086380373451445067, guid: b4458c959a162644bbdd96d3420cb91f, type: 3}
+  wallPrefab: {fileID: 1196453306316611161, guid: 58978ac69e4793046af448c405ab4b33, type: 3}
+  ceilingPrefab: {fileID: 3079426378451717553, guid: f4a6c0bc0c42f9b439135d846806bf42, type: 3}
+  playerPrefab: {fileID: 8973928939802508522, guid: bc91fe44c649f014897aeeb82f0ade81, type: 3}
+  mushroomPrefab: {fileID: 7777957023746358842, guid: e829d75865a519b4f92f8fb971de7112, type: 3}
+  platformPrefab: {fileID: 1196453306316611161, guid: 00b9c5a336a178d4c8b3ec878b8e93e9, type: 3}
+  trampolinePrefab: {fileID: 7577184798665357556, guid: 100ca014a0c5faa44a76aa1eb96db1aa, type: 3}
+  fallingCeilingPrefab: {fileID: 3079426378451717553, guid: fc917dc69f7b63f48b40faaacc81bce4, type: 3}
+  spikePrefab: {fileID: 878132781189637974, guid: f9bad2e69cdc0204bbe095585bfdea29, type: 3}
+  indianPrefab: {fileID: 1704807669795127604, guid: c9df27cebcfe2b1489e7cbff4b8fa71a, type: 3}
+  monsterPrefab: {fileID: 4945041900591441488, guid: 78d381d1ce2c9b340a90bcccf824756d, type: 3}
+  slidingSpikePrefab: {fileID: 878132781189637974, guid: 42a6d7afa75504d4a96e8e15a97c4955, type: 3}
+  totalWidthInBlocks: 20
+  wallRows: 5
+  wallColumns: 3
+  ceilingHeight: 500
+--- !u!1001 &1325708817370231951
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4068060579286185180}
+    m_Modifications:
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3317401425594685819, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+      propertyPath: m_Name
+      value: JungleBg
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+--- !u!4 &1890723253423318786 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 601494352214791053, guid: a7f7f4ed187d8f842b904cf197694964, type: 3}
+  m_PrefabInstance: {fileID: 1325708817370231951}
+  m_PrefabAsset: {fileID: 0}

@@ -116,9 +116,9 @@ TextureImporter:
       name: Gemini_Generated_Image_9f3w319f3w319f3w (1)_LE_upscale_prime_0
       rect:
         serializedVersion: 2
-        x: 323
+        x: 383
         y: 369
-        width: 1696
+        width: 1636
         height: 985
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

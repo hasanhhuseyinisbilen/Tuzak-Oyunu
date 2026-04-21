@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1447031599528509254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9175265321631076436}
+  - component: {fileID: 3818132524753793499}
+  m_Layer: 0
+  m_Name: Level24
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9175265321631076436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447031599528509254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2711.2732, y: 218.92314, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3818132524753793499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447031599528509254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c50659cc2015f440983b7c79bd14f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Level24Generator
+  groundPrefab: {fileID: 4101208026220145563, guid: 199fa93687e72fa469fd8fc11905bb91, type: 3}
+  wallPrefab: {fileID: 6048208016203114780, guid: 2119f4b03bf082549879fa4514675d0f, type: 3}
+  mushroomPrefab: {fileID: 7777957023746358842, guid: e829d75865a519b4f92f8fb971de7112, type: 3}
+  finishMushroomPrefab: {fileID: 7777957023746358842, guid: 5b550b9d6ed8b2d4faae839057cde004, type: 3}
+  playerPrefab: {fileID: 8973928939802508522, guid: 2965fa1e16455d849be458dd6d43f363, type: 3}
+  sawPrefab: {fileID: 2449353130363455599, guid: bbe8b49a969d4a2479553dd5338dabcf, type: 3}
+  alternateSawPrefab: {fileID: 2449353130363455599, guid: eec0c0ba8ab39bb47b0ebcba2a824036, type: 3}
+  platformPrefab: {fileID: 7086380373451445067, guid: cc64d928e5ae1b346a497854820e57cc, type: 3}
+  nativeAmericanPrefab: {fileID: 1704807669795127604, guid: c9df27cebcfe2b1489e7cbff4b8fa71a, type: 3}
+  spikePrefab: {fileID: 878132781189637974, guid: 6280287e394d0e24ea96a0f2f6b47346, type: 3}
+  backgroundPrefab: {fileID: 1578063883608764653, guid: 1f482147c4b6a0547a54bb910c9d5281, type: 3}
+  totalWidthInBlocks: 12
+  wallRows: 5
+  wallColumns: 3
+  wallYOffset: -150

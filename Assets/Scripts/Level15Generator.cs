@@ -54,7 +54,6 @@ public class Level15Generator : MonoBehaviour
         float groundHalfHeight = GetHalfHeight(groundPrefab);
         float topY = groundHalfHeight;
 
-        // 1. Düşen Zemin Tuzağı (0-5)
         FallingGround lastFallingBlock = null;
 
         for (int i = 0; i < 6; i++)
@@ -69,34 +68,34 @@ public class Level15Generator : MonoBehaviour
                 lastFallingBlock = currentFalling;
             }
 
-            // Tavan
             float ceilingHalfHeight = GetHalfHeight(ceilingPrefab);
             Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset + ceilingHalfHeight, 0), Quaternion.identity);
 
-            if (i == 0)
+            switch (i)
             {
-                GenerateWalls(0, true);
-                float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
-                Instantiate(startIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
+                case 0:
+                    GenerateWalls(0, true);
+                    float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
+                    Instantiate(startIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
 
-                float playerHalfHeight = GetHalfHeight(playerPrefab);
-                float playerXPos = xPos + GetHalfWidth(startIglooPrefab) + GetHalfWidth(playerPrefab);
-                Instantiate(playerPrefab, new Vector3(playerXPos, topY + playerHalfHeight, 0), Quaternion.identity);
-            }
+                    float playerHalfHeight = GetHalfHeight(playerPrefab);
+                    float playerXPos = xPos + GetHalfWidth(startIglooPrefab) + GetHalfWidth(playerPrefab);
+                    Instantiate(playerPrefab, new Vector3(playerXPos, topY + playerHalfHeight, 0), Quaternion.identity);
+                    break;
 
-            // Tavan Testereleri (1-5 arası)
-            if (i >= 1 && i <= 5)
-            {
-                float sawHalfHeight = GetHalfHeight(sawPrefab);
-                // Orijinal mantık: Tavan merkezinden biraz aşağıda (sawH/4f kadar)
-                Instantiate(sawPrefab, new Vector3(xPos, ceilingYOffset - (sawHalfHeight / 2f), 0), Quaternion.identity);
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    float sawHalfHeight = GetHalfHeight(sawPrefab);
+                    Instantiate(sawPrefab, new Vector3(xPos, ceilingYOffset - (sawHalfHeight / 2f), 0), Quaternion.identity);
+                    break;
             }
         }
 
-        // 2. Hassas Pusu Bölgesi (Sıfır boşluklu yerleşim)
         float currentObstacleX = 6 * groundHalfWidth * 2;
 
-        // 4 Diken
         for (int j = 0; j < 4; j++) 
         {
             float w = GetHalfWidth(groundSpikePrefab);
@@ -105,13 +104,11 @@ public class Level15Generator : MonoBehaviour
             currentObstacleX += w * 2;
         }
 
-        // 1. Kutu
         float boxHalfW = GetHalfWidth(boxPrefab);
         float boxHalfH = GetHalfHeight(boxPrefab);
         Instantiate(boxPrefab, new Vector3(currentObstacleX + boxHalfW, topY + boxHalfH, 0), Quaternion.identity);
         currentObstacleX += boxHalfW * 2;
 
-        // 4 Diken daha
         for (int j = 0; j < 4; j++) 
         {
             float w = GetHalfWidth(groundSpikePrefab);
@@ -120,11 +117,9 @@ public class Level15Generator : MonoBehaviour
             currentObstacleX += w * 2;
         }
 
-        // 2. Kutu (Daha yüksek)
         Instantiate(boxPrefab, new Vector3(currentObstacleX + boxHalfW, topY + (boxHalfH * 2), 0), Quaternion.identity);
         currentObstacleX += boxHalfW * 2;
 
-        // 3. Pusu Bölgesi Altı/Üstü (Zemin ve Tavan)
         int groundIndexAfterTrap = Mathf.CeilToInt(currentObstacleX / (groundHalfWidth * 2));
         for (int i = 6; i < groundIndexAfterTrap; i++)
         {
@@ -134,32 +129,29 @@ public class Level15Generator : MonoBehaviour
             Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset + cHH, 0), Quaternion.identity);
         }
 
-        // 4. Uçurum (2 Blokluk Boşluk)
         int gapStartIndex = groundIndexAfterTrap;
         int gapEndIndex = gapStartIndex + 2;
         for (int i = gapStartIndex; i < gapEndIndex; i++)
         {
             float xPos = (i * groundHalfWidth * 2) + groundHalfWidth;
             
-            // İlk boşlukta dipteki testere
-            if (i == gapStartIndex)
+            switch (i)
             {
-                float sHH = GetHalfHeight(abyssSawPrefab);
-                Instantiate(abyssSawPrefab, new Vector3(xPos, topY + (sHH / 2f), 0), Quaternion.identity);
-            }
+                default:
+                    if (i == gapStartIndex)
+                    {
+                        float sHH = GetHalfHeight(abyssSawPrefab);
+                        Instantiate(abyssSawPrefab, new Vector3(xPos, topY + (sHH / 2f), 0), Quaternion.identity);
 
-            // Uçurumun tam ortasındaki özel testere
-            if (i == gapStartIndex)
-            {
-                float middleX = (i + 1) * groundHalfWidth * 2;
-                Instantiate(middleSawPrefab, new Vector3(middleX, topY + middleSawYHeight, 0), Quaternion.identity);
+                        float middleX = (i + 1) * groundHalfWidth * 2;
+                        Instantiate(middleSawPrefab, new Vector3(middleX, topY + middleSawYHeight, 0), Quaternion.identity);
+                    }
+                    float cHH = GetHalfHeight(ceilingPrefab);
+                    Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset + cHH, 0), Quaternion.identity);
+                    break;
             }
-
-            float cHH = GetHalfHeight(ceilingPrefab);
-            Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset + cHH, 0), Quaternion.identity);
         }
 
-        // 5. Bitiş Alanı (2 Blok)
         for (int i = 0; i < 2; i++)
         {
             int blockIdx = gapEndIndex + i;
@@ -168,11 +160,13 @@ public class Level15Generator : MonoBehaviour
             float cHH = GetHalfHeight(ceilingPrefab);
             Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset + cHH, 0), Quaternion.identity);
 
-            if (i == 1)
+            switch (i)
             {
-                GenerateWalls((blockIdx + 1) * groundHalfWidth * 2, false);
-                float fHH = GetHalfHeight(finishIglooPrefab);
-                Instantiate(finishIglooPrefab, new Vector3(xPos, topY + fHH, 0), Quaternion.identity);
+                case 1:
+                    GenerateWalls((blockIdx + 1) * groundHalfWidth * 2, false);
+                    float fHH = GetHalfHeight(finishIglooPrefab);
+                    Instantiate(finishIglooPrefab, new Vector3(xPos, topY + fHH, 0), Quaternion.identity);
+                    break;
             }
         }
     }

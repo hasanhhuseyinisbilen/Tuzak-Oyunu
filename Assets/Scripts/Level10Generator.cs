@@ -5,8 +5,8 @@ public class Level10Generator : MonoBehaviour
     [Header("Zemin Ayarları")]
     [SerializeField] private GameObject groundPrefab;
     [SerializeField] private GameObject trapGroundPrefab;
-    [SerializeField] private int groundCount = 12;
-    [SerializeField] private float trapGroundY = 2f; // Tuzak zeminlerin yüksekliği
+    [SerializeField] private int groundCount = 14;
+    [SerializeField] private float trapGroundY = 2f;
 
     [Header("Tavan Ayarları")]
     [SerializeField] private GameObject ceilingPrefab;
@@ -21,9 +21,10 @@ public class Level10Generator : MonoBehaviour
     [Header("Obje Ayarları")]
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject trampolinePrefab;
-    [SerializeField] private GameObject trapTrampolinePrefab; // Yeni: Tuzaklı Trambolin
+    [SerializeField] private GameObject trapTrampolinePrefab;
     [SerializeField] private GameObject startIglooPrefab;
     [SerializeField] private GameObject finishIglooPrefab;
+    [SerializeField] private GameObject bgPrefab;
 
     private bool canGenerate = true;
 
@@ -50,55 +51,70 @@ public class Level10Generator : MonoBehaviour
         float groundHalfHeight = GetHalfHeight(groundPrefab);
         float topY = groundHalfHeight;
 
+        if (bgPrefab != null)
+        {
+            float bgW = GetHalfWidth(bgPrefab) * 2;
+            float bgH = GetHalfHeight(bgPrefab) * 2;
+            for (int k = 0; k < 3; k++)
+            {
+                float bgX = (k * bgW) + (bgW / 2f);
+                float bgY = topY + (bgH / 2f);
+                
+                Quaternion rotation = (k == 1) ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
+                
+                GameObject bg = Instantiate(bgPrefab, new Vector3(bgX, bgY, 10f), rotation);
+                bg.name = $"BG_{k}";
+                bg.transform.parent = this.transform;
+
+                ParallaxEffect p = bg.AddComponent<ParallaxEffect>();
+                p.parallaxFactorX = 1f;
+                p.infiniteScrolling = true;
+            }
+        }
+
         for (int i = 0; i < groundCount; i++)
         {
             float xPos = (i * groundHalfWidth * 2) + groundHalfWidth;
             
-            // Örüntü Mantığı:
-            // 0: Normal
-            // 2, 4, 6, 8: Tuzaklı (Custom Y)
-            // Diğerleri (1, 3, 5, 7, 9): Trambolinli (Normal)
-            // 10, 11: Normal Zemin (Kullanıcı İsteği)
-            
-            if (i > 0 && i % 2 == 0 && i <= 8)
+            switch (i)
             {
-                // Tuzaklı Zemin
-                Instantiate(trapGroundPrefab, new Vector3(xPos, trapGroundY, 0), Quaternion.identity);
-            }
-            else
-            {
-                // Normal Zemin
-                Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+                case 0:
+                    Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
+                    GenerateWalls(0, true);
 
-                // Tek sayılarda trambolin koy (1, 3, 5, 7 normal | 9 trap)
-                if (i % 2 != 0 && i <= 9)
-                {
-                    GameObject trampToSpawn = (i == 9) ? trapTrampolinePrefab : trampolinePrefab;
-                    float trampHalfHeight = GetHalfHeight(trampToSpawn);
-                    Instantiate(trampToSpawn, new Vector3(xPos, topY + trampHalfHeight, 0), Quaternion.identity);
-                }
-            }
+                    float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
+                    Instantiate(startIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
 
-            Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset, 0), Quaternion.identity);
+                    float playerHalfHeight = GetHalfHeight(playerPrefab);
+                    float playerXPos = xPos + GetHalfWidth(startIglooPrefab) + GetHalfWidth(playerPrefab);
+                    Instantiate(playerPrefab, new Vector3(playerXPos, topY + playerHalfHeight, 0), Quaternion.identity);
+                    break;
 
-            if (i == 0)
-            {
-                GenerateWalls(0, true);
+                default:
+                    if (i > 0 && i % 2 == 0 && i <= 8)
+                    {
+                        Instantiate(trapGroundPrefab, new Vector3(xPos, trapGroundY, 0), Quaternion.identity);
+                    }
+                    else
+                    {
+                        Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
 
-                float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
-                Instantiate(startIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
+                        if (i % 2 != 0 && i <= 9)
+                        {
+                            GameObject trampToSpawn = (i == 9) ? trapTrampolinePrefab : trampolinePrefab;
+                            float trampHalfHeight = GetHalfHeight(trampToSpawn);
+                            Instantiate(trampToSpawn, new Vector3(xPos, topY + trampHalfHeight, 0), Quaternion.identity);
+                        }
+                    }
 
-                float playerHalfHeight = GetHalfHeight(playerPrefab);
-                float playerXPos = xPos + GetHalfWidth(startIglooPrefab) + GetHalfWidth(playerPrefab);
-                Instantiate(playerPrefab, new Vector3(playerXPos, topY + playerHalfHeight, 0), Quaternion.identity);
-            }
-
-            if (i == groundCount - 1)
-            {
-                float iglooHalfHeight = GetHalfHeight(finishIglooPrefab);
-                float currentTopY = (i > 0 && i % 2 == 0 && i <= 8) ? trapGroundY + GetHalfHeight(trapGroundPrefab) : topY;
-                Instantiate(finishIglooPrefab, new Vector3(xPos, currentTopY + iglooHalfHeight, 0), Quaternion.identity);
-                GenerateWalls(groundCount * groundHalfWidth * 2, false);
+                    if (i == groundCount - 1)
+                    {
+                        float finishIglooHalfHeight = GetHalfHeight(finishIglooPrefab);
+                        float currentTopY = (i > 0 && i % 2 == 0 && i <= 8) ? trapGroundY + GetHalfHeight(trapGroundPrefab) : topY;
+                        Instantiate(finishIglooPrefab, new Vector3(xPos, currentTopY + finishIglooHalfHeight, 0), Quaternion.identity);
+                        GenerateWalls(groundCount * groundHalfWidth * 2, false);
+                    }
+                    break;
             }
         }
     }

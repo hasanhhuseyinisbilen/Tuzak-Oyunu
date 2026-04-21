@@ -48,7 +48,6 @@ public class Level8Generator : MonoBehaviour
         float groundHalfHeight = GetHalfHeight(groundPrefab);
         float topY = groundHalfHeight;
 
-        // Platform Üst Yüzey Yüksekliği
         float platHalfHeight = GetHalfHeight(startPlatformPrefab);
         float platformTopSurfaceY = topY + (platHalfHeight * 2);
 
@@ -59,36 +58,36 @@ public class Level8Generator : MonoBehaviour
             Instantiate(groundPrefab, new Vector3(xPos, 0, 0), Quaternion.identity);
             Instantiate(ceilingPrefab, new Vector3(xPos, ceilingYOffset, 0), Quaternion.identity);
 
-            if (i == 0)
+            switch (i)
             {
-                GenerateWalls(0, true);
+                case 0:
+                    GenerateWalls(0, true);
 
-                // Platform
-                float platHalfWidth = GetHalfWidth(startPlatformPrefab);
-                Instantiate(startPlatformPrefab, new Vector3(platHalfWidth, topY + platHalfHeight, 0), Quaternion.identity);
+                    float pWHalfWidth = GetHalfWidth(startPlatformPrefab);
+                    Instantiate(startPlatformPrefab, new Vector3(pWHalfWidth, topY + platHalfHeight, 0), Quaternion.identity);
 
-                // Platform yanındaki Kutu
-                float boxHalfWidth = GetHalfWidth(boxPrefab);
-                float boxHalfHeight = GetHalfHeight(boxPrefab);
-                float boxX = (platHalfWidth * 2) + boxHalfWidth;
-                float boxY = platformTopSurfaceY - boxHalfHeight; // Platformun üst yüzeyi ile hizalı
-                Instantiate(boxPrefab, new Vector3(boxX, boxY, 0), Quaternion.identity);
+                    float boxHalfWidth = GetHalfWidth(boxPrefab);
+                    float boxHalfHeight = GetHalfHeight(boxPrefab);
+                    float boxX = (pWHalfWidth * 2) + boxHalfWidth;
+                    float boxY = platformTopSurfaceY - boxHalfHeight;
+                    Instantiate(boxPrefab, new Vector3(boxX, boxY, 0), Quaternion.identity);
 
-                // Igloo (Platform üstünde)
-                float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
-                Instantiate(startIglooPrefab, new Vector3(platHalfWidth, platformTopSurfaceY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
+                    float iglooHalfHeight = GetHalfHeight(startIglooPrefab);
+                    Instantiate(startIglooPrefab, new Vector3(pWHalfWidth, platformTopSurfaceY + iglooHalfHeight, 0), Quaternion.Euler(0, 180, 0));
 
-                // Player (Igloo önünde)
-                float playerHalfHeight = GetHalfHeight(playerPrefab);
-                float playerXPos = platHalfWidth + GetHalfWidth(startIglooPrefab) + GetHalfWidth(playerPrefab);
-                Instantiate(playerPrefab, new Vector3(playerXPos, platformTopSurfaceY + playerHalfHeight, 0), Quaternion.identity);
-            }
+                    float playerHalfHeight = GetHalfHeight(playerPrefab);
+                    float playerXPos = pWHalfWidth + GetHalfWidth(startIglooPrefab) + GetHalfWidth(playerPrefab);
+                    Instantiate(playerPrefab, new Vector3(playerXPos, platformTopSurfaceY + playerHalfHeight, 0), Quaternion.identity);
+                    break;
 
-            if (i == groundCount - 1)
-            {
-                float iglooHalfHeight = GetHalfHeight(finishIglooPrefab);
-                Instantiate(finishIglooPrefab, new Vector3(xPos, topY + iglooHalfHeight, 0), Quaternion.identity);
-                GenerateWalls(groundCount * groundHalfWidth * 2, false);
+                default:
+                    if (i == groundCount - 1)
+                    {
+                        float finishIglooHalfHeight = GetHalfHeight(finishIglooPrefab);
+                        Instantiate(finishIglooPrefab, new Vector3(xPos, topY + finishIglooHalfHeight, 0), Quaternion.identity);
+                        GenerateWalls(groundCount * groundHalfWidth * 2, false);
+                    }
+                    break;
             }
         }
     }

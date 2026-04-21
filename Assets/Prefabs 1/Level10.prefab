@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &136843192384674266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5464953296058771927}
+  - component: {fileID: 5019607170737889606}
+  m_Layer: 0
+  m_Name: Level10
+  m_TagString: Trap
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5464953296058771927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136843192384674266}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 834.4104, y: 46.2945, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5019607170737889606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136843192384674266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d05e2ee81dbc724cbc5dd1cfabcba29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Level10Generator
+  groundPrefab: {fileID: 438238441397727655, guid: cf83eb01134f3c148bc02e376cb7b7b5, type: 3}
+  trapGroundPrefab: {fileID: 438238441397727655, guid: 199984405db9a664cb8f645e234b9d2e, type: 3}
+  groundCount: 10
+  trapGroundY: 100
+  ceilingPrefab: {fileID: 5846803965801207199, guid: 06735e7f05a4def47abc14b459ffce2c, type: 3}
+  ceilingYOffset: 200
+  wallPrefab: {fileID: 8143214209138250699, guid: 499b4cdb412f4ed468e621d1a5d69bde, type: 3}
+  wallColumns: 3
+  wallRows: 6
+  wallYOffset: -150
+  playerPrefab: {fileID: 8973928939802508522, guid: 2965fa1e16455d849be458dd6d43f363, type: 3}
+  trampolinePrefab: {fileID: 3541020326800696340, guid: bd20c5ed7e9d4f948a24bd35c163b68a, type: 3}
+  trapTrampolinePrefab: {fileID: 3541020326800696340, guid: 4a4317efa6e10124683553aa02ef817e, type: 3}
+  startIglooPrefab: {fileID: 2947701974701523213, guid: cc2deb62fd6e80e45808305f284d0c4b, type: 3}
+  finishIglooPrefab: {fileID: 2947701974701523213, guid: 40f2de6186386d141b89882a0093f691, type: 3}
+  bgPrefab: {fileID: 1188470352208465100, guid: ed05e1153b4907d4f9ec9a23b7fcf443, type: 3}

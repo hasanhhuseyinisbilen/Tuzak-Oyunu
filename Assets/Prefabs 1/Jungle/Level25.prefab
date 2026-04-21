@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1153423375193343482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7192335485606704116}
+  - component: {fileID: 7159076884459280442}
+  m_Layer: 0
+  m_Name: Level25
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7192335485606704116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153423375193343482}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1688.5598, y: -298.808, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7159076884459280442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153423375193343482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3fd92a9b8dc9e46bbbafedfd1287f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Level25Generator
+  groundPrefab: {fileID: 7086380373451445067, guid: b4458c959a162644bbdd96d3420cb91f, type: 3}
+  wallPrefab: {fileID: 6048208016203114780, guid: 2119f4b03bf082549879fa4514675d0f, type: 3}
+  mushroomPrefab: {fileID: 7777957023746358842, guid: e829d75865a519b4f92f8fb971de7112, type: 3}
+  finishMushroomPrefab: {fileID: 7777957023746358842, guid: 5b550b9d6ed8b2d4faae839057cde004, type: 3}
+  playerPrefab: {fileID: 8973928939802508522, guid: 2965fa1e16455d849be458dd6d43f363, type: 3}
+  platformPrefab: {fileID: 4101208026220145563, guid: e43af3468749a0642a54633196e5a376, type: 3}
+  platform2Prefab: {fileID: 7086380373451445067, guid: 3962f08c56e302e4ba07b474957800ed, type: 3}
+  bridgePrefab: {fileID: 2016475197630663952, guid: e45dc41aa1d0c024fb34dd260753ddec, type: 3}
+  swingingChainPrefab: {fileID: 8130432859788635079, guid: 031579f84fa98b04e9df06b402f50e0e, type: 3}
+  background1Prefab: {fileID: 1634573204307402274, guid: d4ce1ef23be5c0c4b9c96ce39413b10f, type: 3}
+  background2Prefab: {fileID: 3383282710395168214, guid: 20185850e86f3d843acbc6627ef7b285, type: 3}
+  background3Prefab: {fileID: 8421736258416459183, guid: d4e3d84bad1f147428fc47227ae9ae2a, type: 3}
+  platformHeightOffset: 150
+  bridgeHeightOffset: 115
+  chainHeightOffset: 150
+  totalWidthInBlocks: 16
+  wallRows: 5
+  wallColumns: 3
+  wallYOffset: -100

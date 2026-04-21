@@ -18,13 +18,11 @@ public class SlidingSpike : MonoBehaviour
     {
         if (isSliding)
         {
-            // Sola doğru hareket
             transform.Translate(Vector2.left * slideSpeed * Time.deltaTime);
 
-            // Maksimum mesafeye ulaştığında durdur (Opsiyonel)
             if (Vector3.Distance(startPos, transform.position) >= maxDistance)
             {
-                isSliding = false;
+                Destroy(gameObject);
             }
         }
     }
@@ -34,7 +32,6 @@ public class SlidingSpike : MonoBehaviour
         if (!isSliding)
         {
             isSliding = true;
-            Debug.Log("Yatay Diken Fırladı: " + gameObject.name);
         }
     }
 

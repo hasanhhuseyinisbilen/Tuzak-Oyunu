@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4157679911161315224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2674174387497576144}
+  - component: {fileID: 4859828810258977668}
+  m_Layer: 0
+  m_Name: Level34
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2674174387497576144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4157679911161315224}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1776.3053, y: 306.7508, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4859828810258977668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4157679911161315224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ed4de198bd46a409a4bc7fda1c6c6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Level34Generator
+  groundPrefab: {fileID: 7086380373451445067, guid: b4458c959a162644bbdd96d3420cb91f, type: 3}
+  wallPrefab: {fileID: 1196453306316611161, guid: 58978ac69e4793046af448c405ab4b33, type: 3}
+  playerPrefab: {fileID: 8973928939802508522, guid: bc91fe44c649f014897aeeb82f0ade81, type: 3}
+  mushroomPrefab: {fileID: 7777957023746358842, guid: e829d75865a519b4f92f8fb971de7112, type: 3}
+  sawPrefab: {fileID: 2449353130363455599, guid: 4fede869d1ba4944e967fda9e750cfa2, type: 3}
+  hidingSpikePrefab: {fileID: 878132781189637974, guid: 8574dfce35c4ff24d947dbc3b6630f41, type: 3}
+  polePrefab: {fileID: 5954427754027192534, guid: 3f911febfc80920428da94919872f3a2, type: 3}
+  trampolinePrefab: {fileID: 7577184798665357556, guid: 100ca014a0c5faa44a76aa1eb96db1aa, type: 3}
+  slidingSpikedGroundPrefab: {fileID: 7086380373451445067, guid: c59ee151960c14e4487f8e0324d68cbb, type: 3}
+  triggerPrefab: {fileID: 7819536930204885366, guid: 9e610d3b53cc5254b9e01e89dd73dc29, type: 3}
+  totalWidthInBlocks: 15
+  wallRows: 5
+  wallColumns: 3

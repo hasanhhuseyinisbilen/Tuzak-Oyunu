@@ -20,7 +20,7 @@ public class RisingBoxElevator : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
             
-            // Eğer hedefe ulaştıysa dur
+      
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {
                 isActivated = false;
@@ -36,7 +36,7 @@ public class RisingBoxElevator : MonoBehaviour
             Debug.Log("Elevator Box aktive edildi!");
         }
 
-        // Eğer bir zemin objesine çarparsa dur
+        
         if (collision.gameObject.CompareTag("Ground"))
         {
             isActivated = false;
@@ -46,6 +46,6 @@ public class RisingBoxElevator : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        // Yapışma özelliği istenmediği için parent işlemi kaldırıldı
+
     }
 }

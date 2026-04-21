@@ -36,7 +36,7 @@ public class SawSpeedTrigger : MonoBehaviour
                     saw.Activate();
                 }
             }
-            Debug.Log("Sola ve Sağa giden Testereler Hızlandırıldı!");
+            Debug.Log("Sola ve Sağ giden Testereler Hızlandırıldı!");
         }
     }
 
